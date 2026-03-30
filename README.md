@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Zoe -Full-Stack Blog Application
 
 Zoe is a full-stack blog application with React, Node.js, Express, PostgreSQL and Supabase
@@ -23,7 +22,5 @@ Tools: Git, Github
 
 ## Purpose
 This project is part of my full-stack development journey, showcasing real-word app building, problem solving and integrating front-end and backend technologies.
-=======
 # zoe
 Zoe - Full-Stack Blog Application | React + Node.js + PostgreSQL + Supabase | In-rogress
->>>>>>> 14a67e0f44c8bd09d72110f4760228a5e01635dc
