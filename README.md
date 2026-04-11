@@ -1,33 +1,31 @@
 # Pnuma 🕊️
 
-Pnuma is a digital sanctuary designed to bridge the gap between personal faith and community encouragement. It serves as a dedicated channel for believers to document their journey with Christ, share powerful testimonies, and build a lasting altar of remembrance for everything God has done in their lives.
+Pnuma is a Christian testimony platform designed to help believers share their journey with Christ, encourage others, and document God's faithfulness over time.
 
-## 📖 The Vision
-The mission behind Pnuma is to draw people closer to God. By providing a platform for authentic storytelling, we aim to:
-Encourage: Uplift others through shared experiences of faith.
-Remember: Create a personal archive of God’s faithfulness to look back on in the future.
-Evangelize: Provide a tool for evangelists to demonstrate the living power of Jesus to those seeking him.
+## 📖 Vision
+To bring people closer to God through real-life testimonies by:
+- Encouraging others through shared faith experiences  
+- Preserving personal testimonies as a reminder of God's work  
+- Providing a platform for evangelism  
 
 ## 🚀 Current Progress
-The foundation of the app is currently under active development.
-Completed: User Registration, Authentication, and initial Create/Read functionality.
+The application is actively in development.
+
+**Completed:**
+- User Authentication (including Google OAuth)
+- Create & Read testimonies
 
 ## 🛠️ Features
+
 ### Core Functionalities
+- Testimony Management (CRUD)
+- Likes and Comments
+- Secure Authentication
+- Personalized User Dashboard
+- Private Chat System
 
-Full Testimony Management: CRUD (Create, Read, Update, Delete) capabilities for sharing stories.
-Community Interaction: Engage with others through Likes and Comments.
-Secure Access: Robust Registration/Login system including Google Authentication.
-Personalized Dashboard: A custom space featuring user profiles, personal descriptions, and interest-based feed filtering.
-Private Connectivity: An integrated chat-box for one-on-one encouragement and fellowship.
-
-# Pnuma
-Pnuma - | React + Node.js + PostgreSQL + Supabase | In-progress
-
-# Built with passion by Chukwunyely Kingsley Emmanuel.
-
-
-
-
-
-
+## ⚙️ Tech Stack
+- Frontend: React
+- Backend: Node.js
+- Database: PostgreSQL
+- Auth/Storage: Supabase
