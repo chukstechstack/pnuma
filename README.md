@@ -7,7 +7,7 @@
 [![PostgreSQL](https://shields.io)](https://postgresql.org)
 [![Supabase](https://shields.io)](https://supabase.com)
 
-Pneuma is a specialized community platform designed to help believers document and share their personal journeys with Christ. By focusing on data integrity and secure community interactions, Pnuma serves as a digital archive of God’s faithfulness.
+Pneuma is a specialized community platform designed to help believers document and share their personal journeys with Christ. By focusing on data integrity and secure community interactions, Pneuma serves as a digital archive of God’s faithfulness.
 
 🔗 **Live Demo:** [Deploying to Render - Link Coming Soon!]  
 ⚠️ **Project Status:** Active Development (V1 Prototype)
@@ -21,7 +21,7 @@ To bridge the gap between faith and technology by:
 - **Preserving Legacies:** Documenting personal testimonies as a lasting reminder of God's work.
 - **Building Community:** Enabling believers to encourage one another through shared experiences.
 - **Global Evangelism:** Providing a centralized, accessible platform for sharing the Gospel.
-
+a
 ## 🛠️ Technical Highlights
 
 While the UI is currently in a functional prototype stage, the core focus has been on robust **Backend Architecture** and **Security**:
