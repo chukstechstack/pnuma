@@ -39,12 +39,13 @@ const AuthHome = () => {
           <p id="testimony-head"> Pneuma</p>
           <div className="dividing-line"></div>
           <p id="testimony-subhead">
-            Breathing life into every testimony you share here
+            Document your daily journey with God and share the light you find
+            along the way.
           </p>
           <p className="app-description">
-            "Join our community of believers & share your testimony with us.
-            connect, register and start sharing your journey with the world."—
-            Pnuma
+            "Your walk is a library of wisdom. Journal your wins, your
+            struggles, and your insights. Build your personal archive and let
+            the world see God's faithfulness through your story."— Pneuma
           </p>
         </div>
         <div className="button">

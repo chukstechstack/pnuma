@@ -1,13 +1,18 @@
 # Pneuma 🕊️
 
-> **A Mission-Driven Platform for Faith-Based Storytelling**
+> **A Mission-Driven Platform for Faith-Based Testimonies**
 
 [![React](https://shields.io)](https://reactjs.org)
 [![NodeJS](https://shields.io)](https://nodejs.org)
 [![PostgreSQL](https://shields.io)](https://postgresql.org)
 [![Supabase](https://shields.io)](https://supabase.com)
 
-Pneuma is a specialized community platform designed to help believers document and share their personal journeys with Christ. By focusing on data integrity and secure community interactions, Pneuma serves as a digital archive of God’s faithfulness.
+Pneuma: The Digital Journal for the Daily Walk
+
+Pneuma is a personal journal for believers to document their daily journey with God. It is not just for sharing testimonies, but for  daily walk with God —the wins, the losses, the prayers, and the scriptural insights gained in the secret place.
+
+The Goal: To turn your daily walk into a library of wisdom that others can learn from, fostering a community of transparent, growing believers.
+
 
 🔗 **Live Demo:** [Deploying to Render - Link Coming Soon!]  
 ⚠️ **Project Status:** Active Development (V1 Prototype)
@@ -18,7 +23,7 @@ Pneuma is a specialized community platform designed to help believers document a
 
 To bridge the gap between faith and technology by:
 
-- **Preserving Legacies:** Documenting personal testimonies as a lasting reminder of God's work.
+- **Preserving Legacies:** Documenting personal journey as a lasting reminder of God's work.
 - **Building Community:** Enabling believers to encourage one another through shared experiences.
 - **Global Evangelism:** Providing a centralized, accessible platform for sharing the Gospel.
 a
