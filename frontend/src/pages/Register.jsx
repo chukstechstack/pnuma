@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios.js";
 import { Link } from "react-router-dom";
+import "../styles/Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -49,20 +50,22 @@ const Register = () => {
   };
   return (
     <div>
-      <div>
-        <h1> Register </h1>
-        <Link to="/">Back</Link> <hr /> <br />
+      <div className="input-body">
+        <div className="sign-up">
+          <h1> Sign up</h1>
+        </div>
+
+        <RegisterInput
+          handleChange={handleChange}
+          username={username}
+          password={password}
+          first_name={first_name}
+          last_name={last_name}
+          country={country}
+          email={email}
+          handleSubmit={handleSubmit}
+        />
       </div>
-      <RegisterInput
-        handleChange={handleChange}
-        username={username}
-        password={password}
-        first_name={first_name}
-        last_name={last_name}
-        country={country}
-        email={email}
-        handleSubmit={handleSubmit}
-      />
     </div>
   );
 };

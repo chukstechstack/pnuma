@@ -7,22 +7,21 @@ body {
   overflow-x: hidden;
 }
 :root {
-  --cream-bg: #faf9f6; /* Soft Off-White/Cream */
+  --cream-bg: #f9f8f5; /* Soft Off-White/Cream */
   --dove-blue: #b2c8df; /* Peaceful Accent Blue */
   --sunset-orange: #e8aa42; /* Warm Glow Orange */
   --deep-earth: #443002; /* Your current dark brown */
 }
 .body {
-  background-color: var(--cream-bg);
+  background-color: #faf9f6;
   flex: 1;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-bottom: 7vh;
+  padding-bottom: 5vh;
 }
 
 a {
@@ -32,10 +31,10 @@ a {
 
 .navbar {
   background-color: rgb(68, 48, 2);
-  min-height: 6vh;
+  min-height: 5vh;
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 1.5rem;
+  padding: 0.3rem 1.5rem;
   border-bottom: 3px solid var(--sunset-orange);
   align-items: center;
   position: relative
@@ -97,6 +96,7 @@ a {
   font-size: clamp(2.3rem, 7vw, 3rem);
   flex-wrap: wrap;
   justify-content: center;
+  padding: 0 1.5rem
 }
 
 #testimony-head {
@@ -105,23 +105,27 @@ a {
 }
 
 #testimony-subhead {
-  font-weight: 300;
-  font-style: italic;
+  font-weight: 900;
+ 
   color: rgba(178, 98, 1, 0.8);
-  margin-top: 11px;
+  margin-top: 16px;
   text-align: center;
+  font-size: clamp(1.6rem, 4vw, 2rem);
+  max-width: 900px;
+  
 }
 
 .button {
   display: flex;
   gap: 1rem;
-  padding-top: 1rem;
+  padding-top: 1.6rem;
   margin-right: 1rem;
   justify-content: center;
+ 
 }
 
 button {
-  color: #3d2b1f;
+  color: #eecbb3;
   background-color: var(--deep-earth);
   min-height: 5vh;
   border: none;
@@ -136,13 +140,13 @@ button {
 }
 
 button:first-child {
-  background-color: #443002; /* Deep brown */
-  color: #faf9f6; /* Cream text so it's visible */
+ background-color: black; 
+  color: #faf1d5;
 }
 
 button:last-child {
-  background-color: #e8aa42; /* Warm Orange/Gold */
-  color: #443002; /* Deep brown text for contrast */
+  background-color: #755011;
+  color: #ebe8e1; 
   box-shadow: 0 4px 12px rgba(232, 170, 66, 0.3);
 }
 

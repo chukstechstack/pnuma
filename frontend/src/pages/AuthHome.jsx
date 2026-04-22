@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
-import "../styles/Login.css";
+import "../styles/Landing.css";
 import DoveLogo from "../assets/dove-svgrepo-com.svg?react";
 
 const AuthHome = () => {
@@ -13,6 +13,7 @@ const AuthHome = () => {
           <DoveLogo className="nav-logo-img" />
           <span className="nav-logo"> Pnuma </span>
         </div>
+
         <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
           <span className={isOpen ? "bar open" : "bar"}></span>
           <span className={isOpen ? "bar open" : "bar"}></span>
@@ -21,19 +22,17 @@ const AuthHome = () => {
 
         <div className={`nav-links ${isOpen ? "active" : ""}`}>
           <NavLink to="/mission" onClick={() => setIsOpen(false)}>
-            {" "}
-            Our Mission{" "}
+            Our Mission
           </NavLink>
           <NavLink to="/discover" onClick={() => setIsOpen(false)}>
-            {" "}
             Discover
           </NavLink>
           <NavLink to="/contact" onClick={() => setIsOpen(false)}>
-            {" "}
-            Contact{" "}
+            Contact
           </NavLink>
         </div>
       </nav>
+
       <div className="body">
         <div className="testimony-heading">
           <p id="testimony-head"> Pneuma</p>
@@ -43,14 +42,15 @@ const AuthHome = () => {
             along the way.
           </p>
           <p className="app-description">
-            "Your walk is a library of wisdom. Journal your wins, your
-            struggles, and your insights. Build your personal archive and let
-            the world see God's faithfulness through your story."— Pneuma
+            "Your walk is a library of wisdom. Journal your wins, yourstruggles,
+            and your insights. Build your personal archive and let the world see
+            God's faithfulness through your story."— Pneuma
           </p>
         </div>
+
         <div className="button">
-          <button onClick={() => navigate("/auth/login")}> Login</button>
-          <button onClick={() => navigate("/auth/register")}> Register</button>
+          <button onClick={() => navigate("/login")}> Login</button>
+          <button onClick={() => navigate("/register")}> Register</button>
         </div>
       </div>
 
