@@ -1,65 +1,198 @@
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useNavigate, Link } from "react-router-dom";
 import TaskContext from "../context/TaskContext.jsx";
 import { useContext } from "react";
 import api from "../api/axios.js";
 import Task from "../components/HomeTaskInput.jsx";
-import LikeButton from "../components/LikeButton"
+import LikeButton from "../components/LikeButton";
+import NavBar from "../components/NavBar";
+
 const HomePage = () => {
-  const { tasks, loading, deleteTaskFromState, currentUserId } = useContext(TaskContext);
+  const { tasks, deleteTaskFromState, currentUserId } = useContext(TaskContext);
   const navigate = useNavigate();
 
-  const logout = async () => {
-    try {
-      const res = await api.post("/auth/logout");
-
-      toast.success(res.data.message);
-      navigate("/auth/login");
-    } catch (err) {
-      const message = err?.response?.data?.error || err.message;
-      toast.error(message);
-      console.log(err);
-    }
-  };
+  // const logout = async () => {
+  //   try {
+  //     await api.post("/auth/logout");
+  //     navigate("/login");
+  //   } catch (err) {
+  //     const message = err?.response?.data?.error || err.message;
+  //     console.log(message);
+  //   }
+  // };
 
   const deleteTask = async (uuid) => {
     try {
-      const res = await api.delete(`/task/${uuid}`);
-
-      toast.success(res.data.message);
+      await api.delete(`/task/${uuid}`);
       deleteTaskFromState(uuid);
     } catch (err) {
       const message = err?.response?.data?.error || err.message;
-      toast.error(message);
-      console.log(err);
+      console.log(message);
     }
   };
 
   return (
-    <div>
-      <h1> Welcome to Pnuma</h1>
-      <h2>Testimony feed </h2>
-
+    <div
+      style={{
+        backgroundColor: "#ebe9e4",
+        display: "flex",
+        minHeight: "100vh",
+        justifyContent: "center",
+        paddingTop: "90px",
+        marginTop:" 0",
+        gap: "20px",
+        paddingRight: "190px"
+      }}
+    >
+      <NavBar />
       <div>
-        <button onClick={logout}> logout</button>
-        <button onClick={() => navigate("/createtask")}>CreateTask</button>
+        <div
+          style={{
+            backgroundColor: "white",
+            borderRadius: "8px",
+            border: "1px solid #ddd",
+            overflow: "hidden", // Keeps the top banner from spilling out
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.08)",
+          }}
+        >
+          {/* profile blue card */}
+          <div
+            style={{
+              width: "100%",
+              height: "60px",
+              backgroundColor: "#061a83", // Matches your brand color
+            }}
+          ></div>
 
-        <hr />
+          {/* 2. Profile Picture (Overlapping the banner) */}
+          <img
+            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"
+            alt="profile"
+            style={{
+              width: "70px",
+              height: "70px",
+              borderRadius: "50%",
+              border: "3px solid white", // Creates that "cutout" look
+              marginTop: "-35px", // Pulls the image up onto the banner
+              objectFit: "cover",
+            }}
+          />
+
+          {/* 3. Name and Title */}
+          <div style={{ padding: "15px", textAlign: "center" }}>
+            <h3
+              style={{
+                margin: "0",
+                fontSize: "15px",
+                fontWeight: "900",
+                color: "#1c1a1a",
+              }}
+            >
+              Chukwunyelu Kingsley Emmanuel
+            </h3>
+            <p
+              style={{
+                margin: "5px 0",
+                fontSize: "16px",
+                color: "rgb(113, 111, 111)",
+                fontWeight: "900",
+              }}
+            ></p>
+          </div>
+
+          {/* 4. Bottom Divider and Link */}
+          <div
+            style={{
+              width: "100%",
+              borderTop: "1px solid #eee",
+              padding: "10px",
+              textAlign: "center",
+            }}
+          >
+            <Link
+              to="/profile"
+              style={{
+                textDecoration: "none",
+                fontSize: "12px",
+                fontWeight: "bold",
+                color: "#bb8811",
+              }}
+            >
+              View Profile
+            </Link>
+          </div>
+        </div>
       </div>
-      {loading ? (
-        <p> Loading...</p>
-      ) : (
-        <div>
+
+      <div style={{ width: "550px" }}>
+        <div
+          style={{
+            backgroundColor: "white",
+            borderRadius: "8px",
+            border: "1px solid #ddd",
+            padding: "12px 16px",
+            display: "flex",
+            alignItems: "center",
+            marginBottom: "15px",
+            gap: "10px",
+            height: "70px",
+            boxShadow: "0 4px 12px rgba(94, 67, 3, 0.15)",
+          }}
+        >
+          <img
+            src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"
+            alt="profile"
+            style={{
+              width: "48px",
+              height: "48px",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
+          />
+          <button
+            onClick={() => navigate("/createtask")}
+            style={{
+              flex: 1,
+              height: "48px",
+              textAlign: "left",
+              paddingLeft: "16px",
+              backgroundColor: "white",
+              border: "1px solid #a9a70b",
+              borderRadius: "35px",
+              color: "#666",
+              fontSize: "14px",
+              fontWeight: "600",
+              cursor: "pointer",
+              outline: "none",
+              transition: "none",
+              transform: "none",
+              boxShadow: "none",
+            }}
+          >
+            Share a testimony...
+          </button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "12px",
+          }}
+        >
           {tasks.map((task) => {
-            return <Task key={task.id} 
-            task={task}
-            deleteTask={deleteTask} 
-            isOwner={task.user_id === currentUserId}
-             />;
+            return (
+              <Task
+                key={task.id}
+                task={task}
+                deleteTask={deleteTask}
+                isOwner={task.user_id === currentUserId}
+              />
+            );
           })}
         </div>
-      )}
-      
+      </div>
     </div>
   );
 };

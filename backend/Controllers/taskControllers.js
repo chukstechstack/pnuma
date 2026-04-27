@@ -17,21 +17,12 @@ const upload = multer({
 const createTask = [
   upload.single("img"), // parse file
   async (req, res, next) => {
-    const { title, content, category, tags } = req.body; // <-- include tags here
+    const { content } = req.body; // <-- include tags here
     const user_id = req.user.id;
     let img_url = "https://source.unsplash.com/random/300x300?avatar";
 
-    // Safely parse tags into an array
-    let tagsArray = [];
-    if (tags) {
-      tagsArray = tags.split(",").map((tag) => tag.trim());
-    }
-
     try {
-      if (!title) throw new TaskInputError("Title is required");
       if (!content) throw new TaskInputError("Content is required");
-      if (!category) throw new TaskInputError("Category is required");
-      if (!tags) throw new TaskInputError("Tags is required");
 
       if (req.file) {
         // Upload image to Supabase Storage
@@ -57,14 +48,28 @@ const createTask = [
 
       // Insert into Postgres
       const result = await pool.query(
-        `INSERT INTO content(title, content, img, category, tags, user_id )
-         VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
-        [title, content, img_url, category, tagsArray, user_id],
+        `INSERT INTO content(content, img, user_id )
+         VALUES($1, $2, $3) RETURNING *`,
+        [content, img_url, user_id],
       );
+
+      const newPostId = result.rows[0].id
+      const resultWithUser = await pool.query(
+        `select c.*,
+        c.user_id,
+        concat(p.first_name, ' ', p.last_name) AS author_name,
+        p.avatar_url,
+        0 AS like_count,
+        false As is_liked
+        FROM content c
+        join profiles p on c.user_id = p.id
+        where c.id = $1`, [newPostId]
+
+      )
 
       res.json({
         message: "Content created successfully",
-        newTask: result.rows[0],
+        newTask: resultWithUser.rows[0],
       });
     } catch (err) {
       next(err);
@@ -76,12 +81,17 @@ const getTask = async (req, res, next) => {
   const user_id = req.user?.id; // Get current user ID from auth middleware
   try {
     const result = await pool.query(
-      `SELECT c.*, 
-       (SELECT COUNT(*) FROM likes WHERE post_id = c.id) AS like_count,
-       EXISTS (SELECT 1 FROM likes WHERE post_id = c.id AND user_id = $1) AS is_liked
-       FROM content c 
-       ORDER BY c.created_at DESC`,
-      [user_id],
+      `SELECT 
+    c.*, 
+    -- CONCAT won't break if one name is missing
+    CONCAT(p.first_name, ' ', p.last_name) AS author_name, 
+    p.avatar_url,
+    (SELECT COUNT(*) FROM likes WHERE post_id = c.id) AS like_count,
+    EXISTS (SELECT 1 FROM likes WHERE post_id = c.id AND user_id = $1) AS is_liked
+   FROM content c 
+   LEFT JOIN profiles p ON c.user_id = p.id 
+   ORDER BY c.created_at DESC`,
+      [user_id]
     );
     res.json({ tasks: result.rows, currentUserId: user_id });
   } catch (err) {
@@ -98,7 +108,7 @@ const deleteTask = async (req, res, next) => {
       [uuid, user_id],
     );
     if (result.rowCount === 0) {
-      return res.status * (403).json({ error: "You are unauthorized" });
+      return res.status(403).json({ error: "You are unauthorized" });
     }
     res.status(200).json({ message: "Deleted successfully" });
   } catch (err) {
@@ -135,25 +145,9 @@ const patchTask = [
       const updates = [];
       const values = [];
 
-      if (req.body.title) {
-        updates.push(`title = $${updates.length + 1}`);
-        values.push(req.body.title);
-      }
-
       if (req.body.content) {
         updates.push(`content = $${updates.length + 1}`);
         values.push(req.body.content);
-      }
-
-      if (req.body.category) {
-        updates.push(`category = $${updates.length + 1}`);
-        values.push(req.body.category);
-      }
-
-      if (req.body.tags) {
-        const tagsArray = req.body.tags.split(",").map((t) => t.trim());
-        updates.push(`tags = $${updates.length + 1}`);
-        values.push(tagsArray);
       }
 
       if (req.file) {

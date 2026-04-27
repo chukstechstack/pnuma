@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import RegisterInput from "../components/RegisterInput.jsx";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios.js";
 import { Link } from "react-router-dom";
 import "../styles/Register.css";
+import FullPageLoader from "../components/Loader.jsx";
+import "../styles/Loader.css";
 
 const Register = () => {
+  const [isLoading, setIsLoading ] = useState(false) 
   const navigate = useNavigate();
   const [register, setRegister] = useState({
     username: "",
@@ -28,9 +30,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true) 
     try {
-      const res = await api.post("/auth/register", register);
-      toast.success(res.data.message);
+      await api.post("/auth/register", register);
 
       setRegister({
         username: "",
@@ -41,15 +43,16 @@ const Register = () => {
         email: "",
       });
 
-      navigate("/taskhome/home");
+      navigate("/home");
     } catch (err) {
       const message = err.response?.data?.error || err.message;
-      toast.error(message);
-      console.error(err);
+      console.error(message);
+      setIsLoading(false)
     }
   };
   return (
     <div>
+      {isLoading && <FullPageLoader/>}
       <div className="input-body">
         <div className="sign-up">
           <h1> Sign up</h1>

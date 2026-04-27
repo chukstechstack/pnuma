@@ -1,16 +1,14 @@
 import React from "react";
+import "../styles/Login.css";
+import { useNavigate } from "react-router-dom";
 
 
-const LoginInput = ({
- 
-  handleChange,
-  password,
-  email,
-  handleSubmit,
-}) => {
+const LoginInput = ({ handleChange, password, email, handleSubmit }) => {
+  const navigate = useNavigate();
+
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="form-input">
+      <form onSubmit={handleSubmit} className="form-wrapper">
         <input
           type="email"
           name="email"
@@ -18,7 +16,7 @@ const LoginInput = ({
           onChange={handleChange}
           placeholder="email"
         />
-        <hr />
+
         <input
           type="string"
           name="password"
@@ -27,12 +25,30 @@ const LoginInput = ({
           placeholder="password"
         />
 
-        <hr />
-        <button type="submit"> Submit</button>
-        <a href="http://localhost:3000/auth/google" className="google-btn">
-        
-          Sign in with Google
-        </a>
+        <button className="register-button" type="submit">
+          Continue
+        </button>
+
+        <div className="other-login">
+          <div className="login">
+            <p>
+              create account?
+              <span onClick={() => navigate("/register")} className="login-link">
+                Register
+              </span>
+            </p>
+            <div className="google">
+              <p className="or">or</p>
+
+              <a
+                href="http://localhost:3000/auth/google"
+                className="google-btn"
+              >
+                Sign up with Google
+              </a>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );

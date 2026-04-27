@@ -4,11 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const RegisterInput = ({
   handleChange,
-  // username,
   password,
   first_name,
   last_name,
-  // country,
   email,
   handleSubmit,
 }) => {
@@ -40,13 +38,7 @@ const RegisterInput = ({
           placeholder="Email address"
         />
 
-        {/* <input
-            type="text"
-            name="username"
-            value={username}
-            onChange={handleChange}
-            placeholder="username"
-          /> */}
+    
 
         <input
           type="password"
@@ -56,13 +48,7 @@ const RegisterInput = ({
           placeholder="Password"
         />
 
-        {/* <input
-            type="text"
-            name="country"
-            value={country}
-            onChange={handleChange}
-            placeholder="country"
-          /> */}
+  
 
         <button className="register-button" type="submit">
           Continue

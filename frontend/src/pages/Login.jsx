@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import LoginInput from "../components/LoginInput.jsx";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import api from "../api/axios.js";
 import { Link } from "react-router-dom";
 import TaskContext from "../context/TaskContext.jsx";
 import { useContext } from "react";
+import "../styles/Login.css";
+import FullPageLoader from "../components/Loader.jsx";
+import "../styles/Loader.css";
 
 const Login = () => {
   const [login, setLogin] = useState({
     password: "",
     email: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
   const { getTasks } = useContext(TaskContext);
   const navigate = useNavigate();
 
@@ -24,31 +27,37 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     try {
       const res = await api.post("/auth/login", login);
       setLogin({
         email: "",
         password: "",
       });
-      toast.success(res.data.message);
       await getTasks();
-      navigate("/taskhome/home");
+      navigate("/home");
       console.log(res);
     } catch (err) {
       const message = err?.response?.data?.error || err.message;
-      toast.error(message);
+      console.log(message);
+      setIsLoading(false)
+
     }
   };
   return (
     <div>
-      <h1> Login </h1>
-      <Link to="/"> Back </Link> <hr /> <br />
-      <LoginInput
-        handleChange={handleChange}
-        email={email}
-        password={password}
-        handleSubmit={handleSubmit}
-      />
+      {isLoading && <FullPageLoader/>}
+      <div className="login-body">
+        <div className="login-text">
+          <h1> Welcome Back </h1>
+        </div>
+        <LoginInput
+          handleChange={handleChange}
+          email={email}
+          password={password}
+          handleSubmit={handleSubmit}
+        />
+      </div>
     </div>
   );
 };

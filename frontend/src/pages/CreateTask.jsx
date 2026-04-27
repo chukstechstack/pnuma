@@ -17,7 +17,7 @@ const CreateTask = () => {
   const { addTaskToState } = useContext(TaskContext);
   const navigate = useNavigate();
 
-  const { title, content, img, category, tags } = formData;
+  const { content, img} = formData;
   const handleFormData = (e) => {
     const { name, value, files } = e.target;
     setFormData((prev) => ({ ...prev, [name]: files ? files[0] : value }));
@@ -43,11 +43,10 @@ const CreateTask = () => {
         user_id: "",
       });
       addTaskToState(res.data.newTask);
-      toast.success(res.data.message);
-      navigate("/taskhome/home");
+      navigate("/home");
     } catch (err) {
       const message = err.response?.data?.error || err.message;
-      toast.error(message);
+      console.error(message);
     }
   };
 
@@ -60,14 +59,11 @@ const CreateTask = () => {
   return (
     <div>
       <h1> Create A Testimony </h1>
-      <Link to="/taskhome/home"> Back</Link>
-      <hr /> <br />
+
+     
       <TaskInput
-        title={title}
         content={content}
         img={img}
-        category={category}
-        tags={tags}
         handleFormData={handleFormData}
         submitTask={submitTask}
       />
