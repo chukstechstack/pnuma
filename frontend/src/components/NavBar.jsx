@@ -96,7 +96,7 @@ const NavBar = () => {
               type="text"
               placeholder="Search..."
               style={{
-                padding: "4`px 15px 8px 35px",
+                padding: "4px 15px 8px 35px",
                 borderRadius: "20px",
                 border: "1px solid #8c8c90",
                 backgroundColor: "white",
