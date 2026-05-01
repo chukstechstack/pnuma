@@ -7,7 +7,7 @@ import {
   getEditPage,
   toggleLike
 } from "../controllers/taskControllers.js";
-import { ensureAuthenticated } from "./authRoute.js"; // make sure to export it
+import { ensureAuthenticated } from "./authroute.js"; // make sure to export it
 
 const taskRouter = express.Router();
 
