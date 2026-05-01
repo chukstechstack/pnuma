@@ -1,4 +1,4 @@
-import AppError from "./AppError.js"
+import AppError from "./appError.js"
 export default class TaskInputError extends AppError {
     constructor(message, statusCode = 400){
         super(message, statusCode);

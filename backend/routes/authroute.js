@@ -6,7 +6,7 @@ import {
   logoutUser,
   googleCallBack,
 } from "../controllers/authControllers.js";
-import TaskInputError from "../utils/TaskInputError.js";
+import TaskInputError from "../utils/taskInputError.js";
 
 const authRouter = express.Router();
 

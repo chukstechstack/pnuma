@@ -1,7 +1,7 @@
 import pool from "../config/db.js";
 import { createClient } from "@supabase/supabase-js";
 import multer from "multer";
-import TaskInputError from "../utils/TaskInputError.js";
+import TaskInputError from "../utils/taskInputError.js";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,

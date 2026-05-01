@@ -12,7 +12,7 @@ import {
   insertGoogleUser,
   updateGoogleIdByEmail,
 } from "../services/auth/passportService.js";
-import LoginError from "../utils/LoginError.js";
+import LoginError from "../utils/loginError.js";
 
 dotenv.config();
 

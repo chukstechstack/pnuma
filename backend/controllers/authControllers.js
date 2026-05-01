@@ -1,10 +1,10 @@
-import RegistrationError from "../utils/RegistrationError.js";
+import RegistrationError from "../utils/registrationError.js";
 import bcryptjs from "bcryptjs";
 import {
   findUserRegistration,
   registerNewUser,
 } from "../services/auth/authService.js";
-import LoginError from "../utils/LoginError.js";
+import LoginError from "../utils/loginError.js";
 import passport from "passport";
 
 const saltRound = 10;
