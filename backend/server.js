@@ -1,11 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import pool from "./config/db.js";
-import { mainAuthRouter } from "./routes/main/mainAuthRouter.js";
+import { mainAuthRouter } from "./routes/main/mainauthrouter.js";
 import passport from "./config/passport.js";
 import session from "express-session";
 import cors from "cors";
-import mainTaskRouter from "./routes/main/mainTaskRouter.js";
+import mainTaskRouter from "./routes/main/maintaskrouter.js";
 
 // import crypto from "crypto";
 // const sessionSecret = crypto.randomBytes(32).toString('hex');
