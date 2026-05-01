@@ -12,7 +12,7 @@ const NavBar = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        padding: "4px 40px",
+        padding: "4px 10px",
         borderBottom: "1px solid #ddd",
         backgroundColor: "white",
         boxShadow: "0 2px 5px rgba(0, 0, 0, 0.08)",
@@ -114,6 +114,7 @@ const NavBar = () => {
               flexDirection: "column",
               alignItems: "center",
               cursor: "pointer",
+              
             }}
           >
             <svg

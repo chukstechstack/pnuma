@@ -16,11 +16,19 @@ const LikeButton = ({ task }) => {
 
   return (
     <div onClick={handleLike}>
-      <span style={{ fontSize: "15px",  cursor: "pointer" }}>{task.is_liked ? "❤️" : "🤍"}</span>
-
-      <span style={{ fontWeight: "bold", fontSize: "16px", color: "#444" }}>
-        {task.like_count || 0}
-      </span>
+      <button
+        className={`actionButton ${task.is_liked ? "isLiked" : ""}`}
+        onClick={handleLike}
+      >
+        <span style={{ fontSize: "14px" }}>
+          {" "}
+          {task.is_liked ? "👍" : "👍"}{" "}
+        </span>
+        <span>Like</span>
+        {task.like_count > 0 && (
+          <span style={{ fontSize: "12px" }}>{task.like_count}</span>
+        )}
+      </button>
     </div>
   );
 };

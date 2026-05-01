@@ -1,0 +1,395 @@
+.homePageBody {
+    background-color: #f6f2f2;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: flex-start;
+    padding-top: 90px;
+    font-family:
+        -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+        "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.homebody {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 165px;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0 220px;
+}
+
+.profileBody {
+    width: 230px;
+    position: sticky;
+    top: 90px;
+    flex-shrink: 0;
+}
+
+.profileBackground {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.profileBackground:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #bb8811 !important;
+}
+
+.profileBanner {
+    width: 100%;
+    height: 60px;
+    background-color: #061a83;
+}
+
+.profileBannerImage {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid white;
+    margin-top: -35px;
+    object-fit: cover;
+}
+
+.profileNameBody {
+    padding: 15px;
+    text-align: center;
+}
+
+.profileName {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.9);
+    line-height: 1.5;
+}
+
+.profileName:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.profileViewBackground {
+    width: 100%;
+    border-top: 1px solid #eee;
+    padding: 12px;
+    text-align: center;
+}
+
+.profileView {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    color: #0a66c2;
+}
+
+.profileView:hover {
+    text-decoration: underline;
+    color: #004182;
+}
+
+.feedCardBodyWidth {
+    width: 550px;
+}
+
+.feedCardBackground {
+    background-color: white;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+    height: 70px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.2s ease, border 0.2s ease;
+}
+
+.profileBackground:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-color: #bb8811 !important;
+}
+.feedImage {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.feedCardBackground .shareTestimonyButton {
+    background-color: #ffffff !important;
+    color: #666 !important;
+    border: 1px solid #1c1b1b !important;
+    flex: 1;
+    height: 48px;
+    text-align: left;
+    padding-left: 16px;
+    border-radius: 35px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none !important;
+
+    /* 1. This stops all animation/blinking */
+    transition: none !important;
+
+    /* 2. Lock the button in place */
+    box-shadow: none !important;
+    transform: none !important;
+    margin: 0 !important;
+    position: relative;
+}
+
+.feedCardBackground .shareTestimonyButton:hover {
+    background-color: #f3f2f0 !important;
+    /* Ensure border and transform stay identical to prevent jumping */
+    border: 1px solid #1c1b1b !important;
+    transform: none !important;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.feedCardBackground .shareTestimonyButton:active {
+    background-color: #e2e1df !important;
+}
+
+.taskCardBody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* --- Home Input Styling --- */
+
+.menuEditButtonStyle {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    display: block;
+    text-decoration: none;
+    color: #bb8811;
+    font-weight: bold;
+    transition: background-color 0.15s ease;
+}
+
+.menuEditButtonStyle:hover {
+    background-color: #f5f5f5;
+}
+
+.menuDeleteButtonStyle {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    display: block;
+    text-decoration: none;
+    color: red;
+    border-top: 1px solid #eee;
+    transition: background-color 0.15s ease;
+}
+
+.menuDeleteButtonStyle:hover {
+    background-color: #fff0f0;
+}
+
+/* --- Task Card Styles --- */
+
+.taskInputCardBody {
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    transition:
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.taskInputCardBody:hover {
+    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.12) !important;
+    border-color: #bb8811 !important;
+    /* Subtle tint to match your brand gold */
+    cursor: pointer;
+}
+
+.taskAvatarCardBody {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskAvatarcardBackground {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.taskAvatarImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #bb8811;
+    object-fit: cover;
+}
+
+.taskAuthorName {
+    font-size: 14px;
+    /* LinkedIn names are actually slightly smaller but bold */
+    font-weight: 600;
+    /* Semi-bold, not full 900 */
+    color: rgba(0, 0, 0, 0.9);
+    /* Almost black, but softer */
+    line-height: 1.2;
+    display: block;
+}
+
+.taskAuthorName:hover {
+    color: #0a66c2;
+    /* Turns blue on hover */
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.taskCardTestimonyText {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    /* Lighter grey for subtext */
+    font-weight: 400;
+    margin-top: -2px;
+    /* Pulls it closer to the name */
+    line-height: 1.2;
+}
+
+.taskDotButton {
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    font-size: 22px !important;
+    color: #666 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.dotMenuDisplay {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    width: 140px;
+    overflow: hidden;
+}
+
+.postTextContent {
+    text-align: left;
+    /* NEVER use justify for LinkedIn style */
+    font-size: 14px;
+    line-height: 1.42857;
+    /* Very specific LinkedIn line height */
+    color: rgba(0, 0, 0, 0.9);
+    margin-top: 8px;
+    padding: 0 4px;
+    line-height: 1.4;
+    /* Slight horizontal breathing room */
+}
+
+/* Target only buttons inside your feed column */
+.feedCardBodyWidth button {
+    background: none;
+    border: none;
+    box-shadow: none !important;
+    transition: none !important;
+    transform: none !important;
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+
+.showMoreText {
+    background: none !important;
+    border: none;
+    color: #0a66c2 !important;
+    cursor: pointer;
+    font-weight: 600;
+    margin-left: 4px;
+    font-size: 14px;
+    padding: 0;
+    display: inline;
+}
+
+.showMoreText:hover {
+    text-decoration: underline;
+}
+
+.taskContentImageCard {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/* Container for all 4 buttons */
+.taskActionButtonBar {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid #eee;
+    padding: 4px 0;
+    margin-top: 8px;
+}
+
+/* Individual button styling */
+.actionButton {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #666666; /* LinkedIn grey */
+    font-weight: 600 !important;
+    font-size: 13px;
+    transition: background-color 0.2s;
+    flex: 1;
+    justify-content: center;
+     color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.actionButton:hover {
+    background-color: #f3f2f0;
+}
+
+/* Specific styling for when liked */
+.actionButton.isLiked {
+    color: #0a66c2; /* LinkedIn Blue */
+}
+
+/* Container for like comment send repost buttom */
