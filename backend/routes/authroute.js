@@ -5,6 +5,7 @@ import {
   loginUser,
   logoutUser,
   googleCallBack,
+  googleLogin
 } from "../controllers/authControllers.js";
 import TaskInputError from "../utils/taskInputError.js";
 
@@ -22,6 +23,7 @@ authRouter.post("/register", registerUser);
 authRouter.post("/login", loginUser); 
 authRouter.post("/logout", logoutUser);
 authRouter.get("/google/callback", googleCallBack);
+authRouter.get("/auth/google", googleLogin);
 
 authRouter.get(
   "/google",

@@ -114,4 +114,10 @@ const googleCallBack = (req, res, next) => {
   })(req, res, next);
 };
 
-export { registerUser, loginUser, logoutUser, googleCallBack };
+const googleLogin = (req, res, next) => {
+  passport.authenticate("google", { 
+    scope: ["profile", "email"] // <--- THIS IS THE MISSING PIECE
+  })(req, res, next);
+};
+
+export { registerUser, loginUser, logoutUser, googleCallBack, googleLogin };
