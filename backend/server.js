@@ -20,8 +20,11 @@ const PostgresStore = pgSession(session)
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   process.env.REACT_LOCAL_HOST,
-  'http://localhost:5173',
+  'http://localhost:5173'
 ];
+
+
+
 
 app.use(cors({
   origin: function (origin, callback) {
