@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "connect-mongo": "^6.0.0",
-    "connect-pg-simple": "^10.0.0"
-  }
-}
