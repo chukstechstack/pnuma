@@ -18,8 +18,8 @@ const app = express();
 const PostgresStore = pgSession(session)
 
 const allowedOrigins = [
-  'https://pneuma-frontend-oijl.onrender.com', // Your NEW frontend URL
-  'https://pneuma-api-0bvr.onrender.com',      // Your backend URL
+process.env.FRONTEND_URL,// Your NEW frontend URL
+  // 'https://pneuma-api-0bvr.onrender.com',      // Your backend URL
   'http://localhost:5173'                      // Local dev
 ];
 
@@ -28,6 +28,8 @@ app.use(cors({
   origin: allowedOrigins,
   credentials: true
 }));
+// Use '/*splat' or '/*' to avoid the PathError in newer Express versions
+app.options('/*splat', cors()); 
 
 // Add this immediately after your cors() configuration
 
