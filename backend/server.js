@@ -68,7 +68,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const PORT = process.env.PORT || 3000;
-app.options('*', cors());
+app.options('/*', cors());
 
 
 app.use("/auth", mainAuthRouter);
