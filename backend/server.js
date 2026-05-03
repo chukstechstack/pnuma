@@ -18,38 +18,28 @@ const app = express();
 const PostgresStore = pgSession(session)
 
 const allowedOrigins = [
-process.env.FRONTEND_URL,// Your NEW frontend URL
-  // 'https://pneuma-api-0bvr.onrender.com',      // Your backend URL
-  'http://localhost:5173'                      // Local dev
+  'https://pneuma-frontend-oijl.onrender.com', // Your current Render Frontend
+  'http://localhost:5173',                      // Your Local Vite
+  process.env.FRONTEND_URL                      // Fallback from Render Dashboard
 ];
 
-
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    // Check if the origin is in our whitelist
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log("CORS blocked this origin:", origin); // Check Render logs for this!
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
-// Use '/*splat' or '/*' to avoid the PathError in newer Express versions
+
 app.options('/*splat', cors()); 
-
-// Add this immediately after your cors() configuration
-
-
-
-// app.use(cors({
-//   origin: function (origin, callback) {
-//     // Allow requests with no origin (like mobile apps or curl)
-//     if (!origin) return callback(null, true);
-
-//     // Check if the origin is in our whitelist
-//     if (allowedOrigins.includes(origin)) {
-//       callback(null, true);
-//     } else {
-//       console.log("CORS blocked this origin:", origin); // Check Render logs for this!
-//       callback(new Error('Not allowed by CORS'));
-//     }
-//   },
-//   credentials: true
-// }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
