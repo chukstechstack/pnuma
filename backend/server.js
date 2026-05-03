@@ -4,8 +4,10 @@ import pool from "./config/db.js";
 import { mainAuthRouter } from "./routes/main/mainauthrouter.js";
 import passport from "./config/passport.js";
 import session from "express-session";
+import pgSession from "connect-pg-simple";
 import cors from "cors";
 import mainTaskRouter from "./routes/main/maintaskrouter.js";
+
 
 // import crypto from "crypto";
 // const sessionSecret = crypto.randomBytes(32).toString('hex');
@@ -13,10 +15,16 @@ import mainTaskRouter from "./routes/main/maintaskrouter.js";
 
 dotenv.config();
 const app = express();
+const PostgresStore = pgSession(session)
+
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.REACT_LOCAL_HOST
+];
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: allowedOrigins,
     credentials: true,
   }),
 );
@@ -28,6 +36,11 @@ app.enable('trust proxy'); // Add this line!
 
 app.use(
   session({
+    store: new PostgresStore({
+      pool: pool,
+      tableName: 'session',
+      createTableIfMissing: true
+    }),
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
@@ -37,9 +50,9 @@ app.use(
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 1000 * 60 * 60,
     },
-    proxy: true,
-  }),
-);
+    proxy: true
+  })
+)
 
 app.use(passport.initialize());
 app.use(passport.session());
