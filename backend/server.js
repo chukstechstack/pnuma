@@ -19,15 +19,25 @@ const PostgresStore = pgSession(session)
 
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  process.env.REACT_LOCAL_HOST
+  process.env.REACT_LOCAL_HOST,
+  'http://localhost:5173',
 ];
 
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  }),
-);
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin) return callback(null, true);
+
+    // Check if the origin is in our whitelist
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      console.log("CORS blocked this origin:", origin); // Check Render logs for this!
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -58,6 +68,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const PORT = process.env.PORT || 3000;
+app.options('*', cors());
+
 
 app.use("/auth", mainAuthRouter);
 app.use("/task", mainTaskRouter);

@@ -6,6 +6,7 @@ import Task from "../components/HomeTaskInput.jsx";
 import LikeButton from "../components/LikeButton";
 import NavBar from "../components/NavBar";
 import "../styles/Home.css";
+import DevBanner from '../components/DevBanner'
 
 const HomePage = () => {
   const { tasks, deleteTaskFromState, currentUserId } = useContext(TaskContext);
@@ -32,6 +33,7 @@ const HomePage = () => {
   };
   return (
     <div className="homePageBody">
+          <DevBanner />
       <NavBar />
 
       <div className="homebody">
