@@ -1,395 +1,525 @@
 .homePageBody {
-    background-color: #f6f2f2;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    align-items: flex-start;
-    padding-top: 90px;
-    font-family:
-        -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
-        "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
-        "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-        "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: #f6f2f2;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  padding-top: 90px;
+  font-family:
+    -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
+    "Droid Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 .homebody {
-    display: flex;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 165px;
-    gap: 30px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 0 220px;
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  /* Fixed gaps for PC */
+  padding-left: 20px;
+  padding-right: 20px;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  /* SHIFT LOGIC: This makes it slide left as you shrink */
+  margin:0 auto;
+  /* DELETE 'margin: 0' from here */
 }
 
 .profileBody {
-    width: 230px;
-    position: sticky;
-    top: 90px;
-    flex-shrink: 0;
+  width: 230px;
+  position: sticky;
+  top: 90px;
+  flex-shrink: 0;
 }
 
 .profileBackground {
-    background-color: white;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: none;
-    transition: box-shadow 0.2s ease;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: none;
+  transition: box-shadow 0.2s ease;
 }
 
 .profileBackground:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-color: #bb8811 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #bb8811 !important;
 }
 
 .profileBanner {
-    width: 100%;
-    height: 60px;
-    background-color: #061a83;
+  width: 100%;
+  height: 60px;
+  background-color: #061a83;
 }
 
 .profileBannerImage {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 3px solid white;
-    margin-top: -35px;
-    object-fit: cover;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-top: -35px;
+  object-fit: cover;
 }
 
 .profileNameBody {
-    padding: 15px;
-    text-align: center;
+  padding: 15px;
+  text-align: center;
 }
 
 .profileName {
-    margin: 0;
-    font-size: 16px;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.9);
-    line-height: 1.5;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1.5;
 }
 
 .profileName:hover {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .profileViewBackground {
-    width: 100%;
-    border-top: 1px solid #eee;
-    padding: 12px;
-    text-align: center;
+  width: 100%;
+  border-top: 1px solid #eee;
+  padding: 12px;
+  text-align: center;
 }
 
 .profileView {
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: bold;
-    color: #0a66c2;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  color: #0a66c2;
 }
 
 .profileView:hover {
-    text-decoration: underline;
-    color: #004182;
+  text-decoration: underline;
+  color: #004182;
 }
 
 .feedCardBodyWidth {
-    width: 550px;
+  flex: 0 1 550px; /* GROW: 0, SHRINK: 1, BASIS: 550px */
+  max-width: 100%;
+  min-width: 0;
 }
 
 .feedCardBackground {
-    background-color: white;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    gap: 10px;
-    height: 70px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    transition: box-shadow 0.2s ease, border 0.2s ease;
+  background-color: white;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+  min-height: 70px;
+    width: 100%; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+  transition:
+    box-shadow 0.2s ease,
+    border 0.2s ease;
 }
 
 .profileBackground:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      border-color: #bb8811 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #bb8811 !important;
 }
 .feedImage {
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .feedCardBackground .shareTestimonyButton {
-    background-color: #ffffff !important;
-    color: #666 !important;
-    border: 1px solid #1c1b1b !important;
-    flex: 1;
-    height: 48px;
-    text-align: left;
-    padding-left: 16px;
-    border-radius: 35px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    outline: none !important;
+  background-color: #ffffff !important;
+  color: #666 !important;
+  border: 1px solid #1c1b1b !important;
+  flex: 1;
+  height: 48px;
+  text-align: left;
+  padding-left: 16px;
+  border-radius: 35px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none !important;
+  min-width: 0;
+text-overflow: ellipsis;
+  /* 1. This stops all animation/blinking */
+  transition: none !important;
 
-    /* 1. This stops all animation/blinking */
-    transition: none !important;
-
-    /* 2. Lock the button in place */
-    box-shadow: none !important;
-    transform: none !important;
-    margin: 0 !important;
-    position: relative;
+  /* 2. Lock the button in place */
+  box-shadow: none !important;
+  transform: none !important;
+  margin: 0 !important;
+  position: relative;
 }
 
 .feedCardBackground .shareTestimonyButton:hover {
-    background-color: #f3f2f0 !important;
-    /* Ensure border and transform stay identical to prevent jumping */
-    border: 1px solid #1c1b1b !important;
-    transform: none !important;
-    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1) !important;
+  background-color: #f3f2f0 !important;
+  /* Ensure border and transform stay identical to prevent jumping */
+  border: 1px solid #1c1b1b !important;
+  transform: none !important;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1) !important;
 }
 
 .feedCardBackground .shareTestimonyButton:active {
-    background-color: #e2e1df !important;
+  background-color: #e2e1df !important;
 }
 
 .taskCardBody {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 /* --- Home Input Styling --- */
 
 .menuEditButtonStyle {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-    font-size: 14px;
-    display: block;
-    text-decoration: none;
-    color: #bb8811;
-    font-weight: bold;
-    transition: background-color 0.15s ease;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+  text-decoration: none;
+  color: #bb8811;
+  font-weight: bold;
+  transition: background-color 0.15s ease;
 }
 
 .menuEditButtonStyle:hover {
-    background-color: #f5f5f5;
+  background-color: #f5f5f5;
 }
 
 .menuDeleteButtonStyle {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background: none;
-    text-align: left;
-    cursor: pointer;
-    font-size: 14px;
-    display: block;
-    text-decoration: none;
-    color: red;
-    border-top: 1px solid #eee;
-    transition: background-color 0.15s ease;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  display: block;
+  text-decoration: none;
+  color: red;
+  border-top: 1px solid #eee;
+  transition: background-color 0.15s ease;
 }
 
 .menuDeleteButtonStyle:hover {
-    background-color: #fff0f0;
+  background-color: #fff0f0;
 }
 
 /* --- Task Card Styles --- */
 
 .taskInputCardBody {
-    background-color: white;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 12px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    position: relative;
-    transition:
-        box-shadow 0.2s ease,
-        border-color 0.2s ease;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .taskInputCardBody:hover {
-    box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.12) !important;
-    border-color: #bb8811 !important;
-    /* Subtle tint to match your brand gold */
-    cursor: pointer;
+  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.12) !important;
+  border-color: #bb8811 !important;
+  /* Subtle tint to match your brand gold */
+  cursor: pointer;
 }
 
 .taskAvatarCardBody {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .taskAvatarcardBackground {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .taskAvatarImage {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid #bb8811;
-    object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #bb8811;
+  object-fit: cover;
 }
 
 .taskAuthorName {
-    font-size: 14px;
-    /* LinkedIn names are actually slightly smaller but bold */
-    font-weight: 600;
-    /* Semi-bold, not full 900 */
-    color: rgba(0, 0, 0, 0.9);
-    /* Almost black, but softer */
-    line-height: 1.2;
-    display: block;
+  font-size: 14px;
+  /* LinkedIn names are actually slightly smaller but bold */
+  font-weight: 600;
+  /* Semi-bold, not full 900 */
+  color: rgba(0, 0, 0, 0.9);
+  /* Almost black, but softer */
+  line-height: 1.2;
+  display: block;
 }
 
 .taskAuthorName:hover {
-    color: #0a66c2;
-    /* Turns blue on hover */
-    text-decoration: underline;
-    cursor: pointer;
+  color: #0a66c2;
+  /* Turns blue on hover */
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .taskCardTestimonyText {
-    font-size: 12px;
-    color: rgba(0, 0, 0, 0.6);
-    /* Lighter grey for subtext */
-    font-weight: 400;
-    margin-top: -2px;
-    /* Pulls it closer to the name */
-    line-height: 1.2;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  /* Lighter grey for subtext */
+  font-weight: 400;
+  margin-top: -2px;
+  /* Pulls it closer to the name */
+  line-height: 1.2;
 }
 
 .taskDotButton {
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-    font-size: 22px !important;
-    color: #666 !important;
-    box-shadow: none !important;
-    outline: none !important;
-    -webkit-tap-highlight-color: transparent !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  font-size: 22px !important;
+  color: #666 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 .dotMenuDisplay {
-    position: absolute;
-    right: 0;
-    top: 30px;
-    background-color: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 100;
-    width: 140px;
-    overflow: hidden;
+  position: absolute;
+  right: 0;
+  top: 30px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  width: 140px;
+  overflow: hidden;
 }
 
 .postTextContent {
-    text-align: left;
-    /* NEVER use justify for LinkedIn style */
-    font-size: 14px;
-    line-height: 1.42857;
-    /* Very specific LinkedIn line height */
-    color: rgba(0, 0, 0, 0.9);
-    margin-top: 8px;
-    padding: 0 4px;
-    line-height: 1.4;
-    /* Slight horizontal breathing room */
+  text-align: left;
+  /* NEVER use justify for LinkedIn style */
+  font-size: 14px;
+  line-height: 1.42857;
+  /* Very specific LinkedIn line height */
+  color: rgba(0, 0, 0, 0.9);
+  margin-top: 8px;
+  padding: 0 4px;
+  line-height: 1.5em;
+  /* Slight horizontal breathing room */
 }
 
+.clamp-wrapper {
+  max-height: 3em; /* Exact math: line-height (1.5) * 2 lines = 3em */
+  overflow: hidden;
+  position: relative;
+}
+
+.clamp-wrapper::after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30%;
+  height: 1.5em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), white 100%);
+}
 /* Target only buttons inside your feed column */
 .feedCardBodyWidth button {
-    background: none;
-    border: none;
-    box-shadow: none !important;
-    transition: none !important;
-    transform: none !important;
-    padding: 0;
-    margin: 0;
-    outline: none;
+  background: none;
+  border: none;
+  box-shadow: none !important;
+  transition: none !important;
+  transform: none !important;
+  padding: 0;
+  margin: 0;
+  outline: none;
 }
 
 .showMoreText {
-    background: none !important;
-    border: none;
-    color: #0a66c2 !important;
-    cursor: pointer;
-    font-weight: 600;
-    margin-left: 4px;
-    font-size: 14px;
-    padding: 0;
-    display: inline;
+  background: none !important;
+  border: none;
+  color: #0a66c2 !important;
+  cursor: pointer;
+  font-weight: 600;
+ 
+  font-size: 14px;
+  padding: 0;
+ 
 }
 
 .showMoreText:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .taskContentImageCard {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 4px;
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 /* Container for all 4 buttons */
 .taskActionButtonBar {
-    display: flex;
-    justify-content: space-around;
-    border-top: 1px solid #eee;
-    padding: 4px 0;
-    margin-top: 8px;
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #eee;
+  padding: 4px 0;
+  margin-top: 8px;
 }
 
 /* Individual button styling */
 .actionButton {
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    color: #666666; /* LinkedIn grey */
-    font-weight: 600 !important;
-    font-size: 13px;
-    transition: background-color 0.2s;
-    flex: 1;
-    justify-content: center;
-     color: rgba(0, 0, 0, 0.6) !important;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #666666; /* LinkedIn grey */
+  font-weight: 600 !important;
+  font-size: 13px;
+  transition: background-color 0.2s;
+  flex: 1;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .actionButton:hover {
-    background-color: #f3f2f0;
+  background-color: #f3f2f0;
 }
 
 /* Specific styling for when liked */
 .actionButton.isLiked {
-    color: #0a66c2; /* LinkedIn Blue */
+  color: #0a66c2; /* LinkedIn Blue */
 }
 
 /* Container for like comment send repost buttom */
+
+@media (max-width: 768px) {
+  .homePageBody {
+    padding-top: 60px;
+    align-items: center;
+    
+  }
+
+  .homebody {
+    flex-direction: column; /* Stack Profile above Feed */
+    padding: 0 10px; /* Remove the large side padding (220px) */
+    align-items: center;
+    gap: 0;
+    padding-left: 5%; /* Tighter gap for mobile */
+  }
+
+  .profileBody {
+    width: 100%; /* Profile takes full width on mobile */
+    max-width: 550px; /* Match the feed width */
+    position: relative; /* Usually better than sticky on small screens */
+    top: 0;
+    display: none;
+  }
+  .feedCardBodyWidth {
+    width: 100%; /* Feed takes full width on mobile */
+    max-width: 550px;
+  }
+}
+
+/* 1. Add 'min-width: 0' to your feed container to prevent text overflow */
+.feedCardBodyWidth {
+  flex: 0 1 550px;
+  max-width: 100%;
+  min-width: 0; /* Critical: allows the container to shrink smaller than the text inside */
+}
+
+/* 2. ADD THIS BRIDGE QUERY to fix the 894px clipping */
+@media (max-width: 1100px) {
+  .homebody {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: auto; /* Centers it for tablet */
+    justify-content: center;
+     /* Center the layout for iPads */
+  }
+
+  /* Delete This after production */
+  .homePageBody {
+    /* Increase the padding-top to account for the Banner height */
+    padding-top: 60px !important; 
+  }
+
+}
+
+
+/* 3. Adjust your mobile query to start slightly earlier (900px) */
+@media (max-width: 900px) {
+  .homePageBody {
+    padding-top: 10px;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .homebody {
+    flex-direction: column;
+    padding: 0;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .profileBody,
+  .feedCardBodyWidth {
+    width: 100%;
+    max-width: 100%;
+
+  }
+    .profileBody{
+    display: none;
+  }
+
+  .taskInputCardBody,
+  .feedCardBackground {
+    border-radius: 0; /* Square edges look more "full width" on mobile */
+    border-left: none;
+    border-right: none;
+    width: 100%;
+  }
+}
+
+@media (max-width: 900px) {
+  .feedCardBackground {
+    padding: 8px 12px; /* Tighter padding for more button room */
+    gap: 8px;
+  }
+  
+  .feedImage {
+    flex-shrink: 0; /* Prevent the profile pic from getting squished */
+  }
+}
+
+

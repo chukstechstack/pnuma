@@ -1,0 +1,346 @@
+/* Desktop Styles (Default) */
+.main-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 10px;
+  background-color: white;
+  border-bottom: 2px solid #e0e0e0; /* Thicker bottom line */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1px clamp(6px, 2vw, 20px)
+}
+
+.nav-logo-section {
+    flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+   gap: clamp(12px, 2vw, 25px);
+}
+
+.nav-dove-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.5;
+}
+.dove-logo-svg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.5;
+  width: 25px; /* Restores size */
+  height: 25px; /* Restores size */
+  fill: #19191a; /* Restores color */
+  stroke: none;
+  margin-bottom: -5px;
+}
+
+.pneuma-text {
+  font-weight: bold;
+  font-size: 14px;
+  font-family: "Playfair Display", Georgia, serif;
+  color: rgb(113, 81, 6);
+  letter-spacing: 1px;
+}
+
+.search-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: clamp(100px, 20vw, 280px);
+  padding: 4px 15px 8px 35px;
+  border-radius: 20px;
+  border: 2px solid #8c8c90; /* 2px instead of 1px */
+  background-color: #f9f9f9;
+  font-weight: 600; /* Makes text inside feel solid */
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+.search-input:focus {
+  border-color: #bb8811;
+  background-color: white;
+  box-shadow: 0 0 0 1px #bb8811; /* Double-border effect when typing */
+  width: 280px; /* Slight expansion for "weight" change */
+}
+.svg-styling {
+  position: absolute;
+  left: 12px;
+  color: #777879;
+}
+
+.nav-home-icons-container {
+  display: flex;
+  gap: clamp(12px, 3vw, 40px);
+  align-items: center;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.home-font-size {
+  font-size: 12px;
+}
+
+.nav-message-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.message-font-size {
+  font-size: 12px;
+}
+
+.notification-icon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.notification-font-size {
+  font-size: 12px;
+}
+
+.notification-red-bar {
+  position: absolute;
+  top: -2px;
+  right: 8px;
+  background-color: #cc0000;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+}
+
+.profile-bar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-link-styling {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-image-styling {
+  width: 32px; /* Slightly larger */
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid #bb8811; /* Heavy brand border */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+
+.profile-image-styling:hover {
+  transform: scale(1.1); /* Tactile feedback on desktop hover */
+}
+
+
+.me-profile-text-me {
+  font-size: 12px;
+  color: black;
+  margin-top: 2px;
+}
+
+.search-svg-icon {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+   color: #444;
+}
+
+.home-svg-icon {
+  width: 25px;
+  height: 25px;
+  fill: #bb8811;
+  stroke: #bb8811;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.messaging-svg-icon {
+  width: 24px;
+  height: 24px;
+  fill: #bb8811;
+  stroke: #bb8811;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.notification-svg-styling {
+  width: 24px;
+  height: 24px;
+  fill: #bb8811;
+  stroke: #bb8811;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Apply to all clickable nav items */
+.home-container, 
+.nav-message-icons, 
+.notification-icon-container, 
+.profile-link-styling,
+.nav-dove-container {
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent; /* Removes the ugly blue box on Chrome/Android */
+}
+
+/* The "Weight" / Click effect */
+.home-container:active, 
+.nav-message-icons:active, 
+.notification-icon-container:active, 
+.profile-link-styling:active,
+.nav-dove-container:active {
+  transform: scale(0.92); /* Shrinks slightly */
+  opacity: 0.7;           /* Fades slightly */
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Forces exactly 2 lines */
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
+}
+
+/* --- SHARED MOBILE STYLES (Starts at 768px) --- */
+@media (max-width: 768px) {
+  .main-nav {
+    padding: 8px 1px;
+    border-bottom: 2px solid #e0e0e0;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  }
+ 
+  .nav-container {
+    justify-content: flex-start;
+    padding: 0 clamp(4px, 2vw, 10px);
+  }
+
+  /* Hide all text labels */
+  .pneuma-text, 
+  .home-font-size, 
+  .message-font-size, 
+  .notification-font-size, 
+  .me-profile-text-me {
+    display: none !important;
+  }
+
+  /* Bold Search Style */
+  .search-input {
+    padding: 4px 10px 4px 30px;
+    font-size: 13px;
+    border-width: 2px;
+    border-color: #715106;
+    background-color: #f3f2f1;
+    font-weight: 600;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  }
+
+  .search-svg-icon {
+    stroke-width: 4;
+    color: #444;
+  }
+
+  /* Bold Icons & Profile */
+  .home-svg-icon, 
+  .messaging-svg-icon, 
+  .notification-svg-styling {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.5; 
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+  }
+
+  .profile-image-styling {
+    width: 34px; 
+    height: 34px;
+    border-width: 2.5px;
+    border-color: #bb8811; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    flex-shrink: 0; /* Important: stops profile from squishing */
+  }
+}
+
+
+
+/* --- TIGHT SCREEN ADJUSTMENTS (Below 400px) --- */
+@media (max-width: 400px) {
+  .search-input {
+    width: 80px !important;
+    padding-left: 25px;
+  }
+  
+  .search-input::placeholder {
+    color: transparent; /* Clean look on small screens */
+  }
+
+  .nav-logo-section { gap: 4px !important; }
+  .nav-home-icons-container { gap: 8px !important; }
+  
+  .profile-image-styling {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* --- EXTREME LOW SCREEN (Below 320px - Fixes 241px overlap) --- */
+@media (max-width: 320px) {
+  .nav-dove-container {
+    display: none !important; /* Removes logo to save the layout */
+  }
+
+  .nav-logo-section {
+    flex: 0 1 auto;
+    gap: 2px !important;
+  }
+
+  .search-input {
+    width: 65px !important; /* Minimal pill size */
+  }
+
+  .nav-home-icons-container {
+    gap: 5px !important; /* Absolute minimum spacing */
+  }
+}
+

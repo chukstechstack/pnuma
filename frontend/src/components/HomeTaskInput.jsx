@@ -59,17 +59,22 @@ const Task = ({ task, deleteTask, isOwner }) => {
         )}
       </div>
 
-      {/* --- POST CONTENT --- */}
-      <div className="postTextContent">
-        {isExpanded || !shouldShowMore
-          ? content
-          : `${content.substring(0, textLimit)}...`}
-        {shouldShowMore && !isExpanded && (
-          <button onClick={() => setIsExpanded(true)} className="showMoreText">
-            see more
-          </button>
-        )}
-      </div>
+      
+  {/* --- POST CONTENT --- */}
+<div className="postTextContent">
+  {/* Changed from span to div */}
+  <div className={!isExpanded && shouldShowMore ? "clamp-wrapper" : ""}>
+    {content}
+  </div>
+  
+  {shouldShowMore && !isExpanded && (
+    <button onClick={() => setIsExpanded(true)} className="showMoreText">
+      ... see more
+    </button>
+  )}
+</div>
+
+
 
       {img && (
         <div style={{ margin: "0 -16px" }}>

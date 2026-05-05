@@ -18,9 +18,9 @@ const app = express();
 const PostgresStore = pgSession(session)
 
 const allowedOrigins = [
-  'https://pneuma-frontend-oijl.onrender.com', // Your current Render Frontend
-  'http://localhost:5173',                      // Your Local Vite
-  process.env.FRONTEND_URL                      // Fallback from Render Dashboard
+  'https://pneuma-frontend-oijl.onrender.com', 
+  'http://localhost:5173',                     
+  process.env.FRONTEND_URL                      
 ];
 
 app.use(cors({
