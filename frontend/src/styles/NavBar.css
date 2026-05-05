@@ -20,15 +20,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1px clamp(6px, 2vw, 20px)
+  padding: 1px clamp(6px, 2vw, 20px);
 }
 
 .nav-logo-section {
-    flex: 1;
+  flex: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
-   gap: clamp(12px, 2vw, 25px);
+  gap: clamp(12px, 2vw, 25px);
 }
 
 .nav-dove-container {
@@ -168,7 +168,6 @@
   transform: scale(1.1); /* Tactile feedback on desktop hover */
 }
 
-
 .me-profile-text-me {
   font-size: 12px;
   color: black;
@@ -183,7 +182,7 @@
   stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;
-   color: #444;
+  color: #444;
 }
 
 .home-svg-icon {
@@ -217,130 +216,184 @@
 }
 
 /* Apply to all clickable nav items */
-.home-container, 
-.nav-message-icons, 
-.notification-icon-container, 
+.home-container,
+.nav-message-icons,
+.notification-icon-container,
 .profile-link-styling,
 .nav-dove-container {
-  transition: transform 0.1s ease, opacity 0.1s ease;
+  transition:
+    transform 0.1s ease,
+    opacity 0.1s ease;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent; /* Removes the ugly blue box on Chrome/Android */
 }
 
 /* The "Weight" / Click effect */
-.home-container:active, 
-.nav-message-icons:active, 
-.notification-icon-container:active, 
+.home-container:active,
+.nav-message-icons:active,
+.notification-icon-container:active,
 .profile-link-styling:active,
 .nav-dove-container:active {
   transform: scale(0.92); /* Shrinks slightly */
-  opacity: 0.7;           /* Fades slightly */
+  opacity: 0.7; /* Fades slightly */
 }
 
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2; /* Forces exactly 2 lines */
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* --- SHARED MOBILE STYLES (Starts at 768px) --- */
-@media (max-width: 768px) {
+/* --- GLOBAL THEME RESET --- */
+:root {
+  --li-vanilla: #f3f2ef;
+  --li-border: #e0e0e0;
+  --li-blue: #0a66c2;
+  --brand-gold: #bb8811;
+  --text-main: rgba(0, 0, 0, 0.9);
+  --text-grey: rgba(0, 0, 0, 0.6);
+}
+/* --- UNIFIED MOBILE & TABLET VIEW (Up to 1024px) --- */
+@media (max-width: 1024px) {
+  /* 1. Kill the Desktop Nav for all touch devices */
   .main-nav {
-    padding: 8px 1px;
-    border-bottom: 2px solid #e0e0e0;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-  }
- 
-  .nav-container {
-    justify-content: flex-start;
-    padding: 0 clamp(4px, 2vw, 10px);
-  }
-
-  /* Hide all text labels */
-  .pneuma-text, 
-  .home-font-size, 
-  .message-font-size, 
-  .notification-font-size, 
-  .me-profile-text-me {
     display: none !important;
   }
 
-  /* Bold Search Style */
-  .search-input {
-    padding: 4px 10px 4px 30px;
-    font-size: 13px;
-    border-width: 2px;
-    border-color: #715106;
-    background-color: #f3f2f1;
+  /* 2. Fix the Body Zoom, Color & Padding */
+  .homePageBody {
+    background-color: var(--li-vanilla);
+    padding-top: 55px; /* Space for top bar */
+    padding-bottom: 70px; /* Extra space for bottom nav + safe area */
+  }
+
+  /* 3. SHARP TOP NAV (Profile, Search, Message Icon) */
+  .mobile-top-nav {
+    display: flex !important;
+    flex-direction: row !important; /* Forces items into a line */
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+  }
+  .mobile-nav-left {
+    display: flex;
+    flex-direction: row; /* Ensures Avatar and Search are side-by-side */
+    align-items: center;
+    flex: 1; /* Allows this section to fill space */
+  }
+
+  .mobile-search-trigger {
+    flex-grow: 1; /* Search bar fills the remaining row space */
+    margin-left: 10px;
+  }
+
+  /* 4. SHARP BOTTOM NAV (Stays visible on Tablet now) */
+  .mobile-bottom-nav {
+    display: flex !important; /* Force show on tablet */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 56px;
+    background: white;
+    border-top: 1px solid var(--li-border);
+    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .nav-item {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-grey);
+    font-size: 11px;
+    gap: 3px;
+  }
+
+  .nav-item.active {
+    color: var(--text-main);
     font-weight: 600;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
   }
 
-  .search-svg-icon {
-    stroke-width: 4;
-    color: #444;
+  /* 5. FEED CARDS (Centered on Tablet, Full-width on Phone) */
+  .homebody {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
   }
 
-  /* Bold Icons & Profile */
-  .home-svg-icon, 
-  .messaging-svg-icon, 
-  .notification-svg-styling {
-    width: 22px;
-    height: 22px;
-    stroke-width: 2.5; 
-    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
+  .feedCardBodyWidth {
+    width: 100%;
+    max-width: 600px; /* Prevents the "stretched" look on iPads */
   }
 
-  .profile-image-styling {
-    width: 34px; 
-    height: 34px;
-    border-width: 2.5px;
-    border-color: #bb8811; 
-    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
-    flex-shrink: 0; /* Important: stops profile from squishing */
+  .feedCardBackground,
+  .taskInputCardBody {
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin: 8px 0 !important;
+    border-left: none !important;
+    border-right: none !important;
+    box-shadow: none !important;
+    border-top: 1px solid var(--li-border);
+    border-bottom: 1px solid var(--li-border);
+    background: white;
+  }
+
+  /* 6. TABLET IMAGE FIX (No overflow) */
+  .taskContentImageCard {
+    width: 100%;
+    margin: 8px 0;
+    border-radius: 0;
+    max-height: 500px;
+    object-fit: cover;
+  }
+
+  /* 7. MESSAGE BOX DOCK */
+  .messaging-dock-mobile {
+    display: flex !important;
+    position: fixed;
+    bottom: 56px;
+    width: 100%;
+    max-width: 600px; /* Matches feed width on iPad */
+    left: 50%;
+    transform: translateX(-50%);
+    height: 46px;
+    background: white;
+    border: 1px solid var(--li-border);
+    border-bottom: none;
+    border-radius: 8px 8px 0 0;
+  }
+
+  /* Position the Badge Exactly on the Icon */
+  .icon-badge-wrap {
+    position: relative; /* Anchor for the badge */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .badge {
+    position: absolute;
+    /* Top-right corner of the icon */
+    top: -10px;
+    right: -9px;
+
+    background-color: #cc1016;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+    min-width: 10px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid white; /* Adds a "gap" between badge and icon */
+    z-index: 10;
   }
 }
-
-
-
-/* --- TIGHT SCREEN ADJUSTMENTS (Below 400px) --- */
-@media (max-width: 400px) {
-  .search-input {
-    width: 80px !important;
-    padding-left: 25px;
-  }
-  
-  .search-input::placeholder {
-    color: transparent; /* Clean look on small screens */
-  }
-
-  .nav-logo-section { gap: 4px !important; }
-  .nav-home-icons-container { gap: 8px !important; }
-  
-  .profile-image-styling {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-/* --- EXTREME LOW SCREEN (Below 320px - Fixes 241px overlap) --- */
-@media (max-width: 320px) {
-  .nav-dove-container {
-    display: none !important; /* Removes logo to save the layout */
-  }
-
-  .nav-logo-section {
-    flex: 0 1 auto;
-    gap: 2px !important;
-  }
-
-  .search-input {
-    width: 65px !important; /* Minimal pill size */
-  }
-
-  .nav-home-icons-container {
-    gap: 5px !important; /* Absolute minimum spacing */
-  }
-}
-
