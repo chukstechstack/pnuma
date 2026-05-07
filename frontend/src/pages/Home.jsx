@@ -69,6 +69,7 @@ const HomePage = () => {
       
 
           <div className="taskCardBody">
+            
                 <div className="feedCardBackground">
          
             <img

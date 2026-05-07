@@ -16,16 +16,13 @@
   display: flex;
   width: 100%;
   max-width: 1100px;
-  /* Fixed gaps for PC */
   padding-left: 20px;
   padding-right: 20px;
   gap: 30px;
   align-items: flex-start;
   justify-content: flex-start;
-
-  /* SHIFT LOGIC: This makes it slide left as you shrink */
-  margin:0 auto;
-  /* DELETE 'margin: 0' from here */
+  margin: 0 auto;
+ 
 }
 
 .profileBody {
@@ -117,15 +114,13 @@
   padding: 12px 16px;
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
+  margin-bottom: 0px;
   gap: 10px;
   min-height: 70px;
-    width: 100%; 
+  width: 100%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    box-sizing: border-box;
-  transition:
-    box-shadow 0.2s ease,
-    border 0.2s ease;
+  box-sizing: border-box;
+
 }
 
 .profileBackground:hover {
@@ -153,24 +148,15 @@
   cursor: pointer;
   outline: none !important;
   min-width: 0;
-text-overflow: ellipsis;
-  /* 1. This stops all animation/blinking */
+  text-overflow: ellipsis;
   transition: none !important;
-
-  /* 2. Lock the button in place */
   box-shadow: none !important;
   transform: none !important;
   margin: 0 !important;
   position: relative;
 }
 
-.feedCardBackground .shareTestimonyButton:hover {
-  background-color: #f3f2f0 !important;
-  /* Ensure border and transform stay identical to prevent jumping */
-  border: 1px solid #1c1b1b !important;
-  transform: none !important;
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.1) !important;
-}
+
 
 .feedCardBackground .shareTestimonyButton:active {
   background-color: #e2e1df !important;
@@ -179,7 +165,7 @@ text-overflow: ellipsis;
 .taskCardBody {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 5px;
 }
 
 /* --- Home Input Styling --- */
@@ -227,25 +213,18 @@ text-overflow: ellipsis;
 .taskInputCardBody {
   background-color: white;
   border: 1px solid #ddd;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
+  box-shadow: none;
+  border-radius: 0px;
   padding: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 0px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 0px;
   position: relative;
-  transition:
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+
 }
 
-.taskInputCardBody:hover {
-  box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.12) !important;
-  border-color: #bb8811 !important;
-  /* Subtle tint to match your brand gold */
-  cursor: pointer;
-}
+
 
 .taskAvatarCardBody {
   display: flex;
@@ -257,6 +236,14 @@ text-overflow: ellipsis;
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 1;
+   min-width: 0;
+}
+
+.taskAvatarcardBackground > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .taskAvatarImage {
@@ -348,6 +335,8 @@ text-overflow: ellipsis;
   height: 1.5em;
   background: linear-gradient(to right, rgba(255, 255, 255, 0), white 100%);
 }
+
+
 /* Target only buttons inside your feed column */
 .feedCardBodyWidth button {
   background: none;
@@ -366,10 +355,9 @@ text-overflow: ellipsis;
   color: #0a66c2 !important;
   cursor: pointer;
   font-weight: 600;
- 
+
   font-size: 14px;
   padding: 0;
- 
 }
 
 .showMoreText:hover {
@@ -377,47 +365,53 @@ text-overflow: ellipsis;
 }
 
 .taskContentImageCard {
-  width: 100%;
-  max-height: 400px;
+  width: calc(100% + 32px); /* Offsets the 16px padding on both sides */
+  margin-left: -16px;      /* Pulls the image to the left edge */
+  margin-right: -16px;     /* Pulls the image to the right edge */
+  height: 450px;           
   object-fit: cover;
-  border-radius: 4px;
+  display: block;
+  margin-top: 12px;        /* Space between text and image */
+  border: none;
 }
 
-/* Container for all 4 buttons */
+
+
 .taskActionButtonBar {
   display: flex;
-  justify-content: space-around;
-  border-top: 1px solid #eee;
-  padding: 4px 0;
-  margin-top: 8px;
+  justify-content: space-between; /* Pushes buttons left, count right */
+  align-items: center;
+  padding: 8px 12px;
+  border-top: 1px solid #e0e0e0;
+    width: 100%; /* Force it to stay within parent */
+  box-sizing: border-box; /* Include padding in width */
 }
 
-/* Individual button styling */
+.action-buttons-left {
+  display: flex;
+  gap: 12px;
+}
+
 .actionButton {
-  background: none;
-  border: none;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: 6px; /* Space between icon and word */
+  background: none;
+  border: none;
+  color: #666666;
+  font-weight: 600;
+  padding: 8px;
   border-radius: 4px;
   cursor: pointer;
-  color: #666666; /* LinkedIn grey */
-  font-weight: 600 !important;
-  font-size: 13px;
-  transition: background-color 0.2s;
-  flex: 1;
-  justify-content: center;
-  color: rgba(0, 0, 0, 0.6) !important;
 }
 
 .actionButton:hover {
-  background-color: #f3f2f0;
+  background-color: #f3f3f3;
 }
 
-/* Specific styling for when liked */
-.actionButton.isLiked {
-  color: #0a66c2; /* LinkedIn Blue */
+.total-likes-count {
+  font-size: 12px;
+  color: #666666;
 }
 
 /* Mobile Top Nav (Profile + Search + Messaging Icon) */
@@ -425,19 +419,21 @@ text-overflow: ellipsis;
   display: none; /* Hidden on PC */
 }
 
+
+
 /* UNIFIED MOBILE & TABLET LAYOUT (LinkedIn Vanilla Style) */
 @media (max-width: 1024px) {
   /* 1. LAYOUT & BODY RESET */
   .homePageBody {
-    padding-top: 52px;    /* Matches Top Nav height */
-    padding-bottom: 60px; /* Matches Bottom Nav height */
-    background-color: #f3f2ef !important; /* LinkedIn Vanilla Grey */
+   padding: 0 !important; /* Matches Bottom Nav height */
+  width: 100%;
+  margin: 0;
   }
 
   .homebody {
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     padding: 0;
     max-width: 100%;
     margin: 0 auto;
@@ -482,6 +478,26 @@ text-overflow: ellipsis;
     color: #666;
     font-size: 14px;
   }
+/* 1. Ensure the header spans the full width and stays inside */
+.taskAvatarCardBody {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 16px !important; /* Gives breathing room from screen edges */
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 2. Fix the name container so it doesn't shove the dots off-screen */
+.taskAvatarcardBackground {
+  display: flex !important;
+  flex-direction: row !important; /* Keeps name next to profile pic */
+  align-items: center !important;
+  gap: 10px !important;
+  flex: 1 !important;
+  min-width: 0 !important; /* This is the secret sauce for mobile alignment */
+}
+
 
   .mobile-avatar {
     width: 34px;
@@ -523,47 +539,76 @@ text-overflow: ellipsis;
     stroke-width: 2; /* Mature, thin lines */
   }
 
-  .nav-item.active { color: #000000; font-weight: 600; }
+  .nav-item.active {
+    color: #000000;
+    font-weight: 600;
+  }
 
-  /* 4. FEED CARDS (Edge-to-Edge) */
-  .feedCardBackground, .taskInputCardBody {
-    width: 100%;
+  .postTextContent {
+  padding: 8px 16px !important; /* Matches the header padding for a clean line */
+  box-sizing: border-box;
+}
+    .feedCardBackground {
+    margin-top: 0px !important; 
+    border-top: 1px solid #e0e0e0 !important;
+  }
+  
+    .feedCardBackground {
+    margin: 0 0 8px 0 !important; /* This is the "Gap Killer" */
+    width: 100% !important;
     border-radius: 0 !important;
-    margin-bottom: 8px !important;
     border-left: none !important;
     border-right: none !important;
-    box-shadow: none !important; /* No more "pale" blur */
-    border-top: 1px solid #e0e0e0;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 12px 16px;
-    background: white;
-    box-sizing: border-box;
+    border-top: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
   }
 
-  /* 5. MATURE POST IMAGES */
-  .taskContentImageCard {
-    margin: 8px -16px; /* Pulls image to touch screen edges */
-    width: calc(100% + 32px); 
-    border-radius: 0;
-    max-height: 500px;
-    object-fit: cover;
+.taskInputCardBody {
+  margin: 0 0 8px 0 !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  /* ADD THIS LINE BELOW */
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+    .taskCardBody {
+    gap: 0px !important; 
   }
+.taskContentImageCard {
+  width: 100% !important;
+  margin: 10px 0 !important;
+  border-radius: 0 !important;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+/* Removes the share box on mobile since the nav button handles posting */
+.feedCardBackground {
+  display: none !important;
+}
 
   /* 6. ACTION BUTTONS & TEXT */
   .taskActionButtonBar {
-    margin-top: 12px;
-    border-top: 1px solid #f2f2f2;
-    padding: 8px 0;
+  box-sizing: border-box;
+    padding: 8px 16px;
   }
 
   .actionButton {
     flex-direction: column; /* Icon over text for mobile maturity */
     font-size: 11px;
     gap: 4px;
-    color: rgba(0,0,0,0.6) !important;
+    color: rgba(0, 0, 0, 0.6) !important;
   }
 
-  .taskAuthorName { font-size: 15px; }
+  .taskAuthorName {
+    font-size: 15px;
+  }
   .badge {
     position: absolute;
     top: -5px;
@@ -576,33 +621,38 @@ text-overflow: ellipsis;
   }
 
   /* Hide Desktop Nav */
-  .main-nav { display: none !important; }
+  .main-nav {
+    display: none !important;
+  }
+  .taskInputCardBody:hover {
+  background-color: #f9f9f9; /* Subtle color change instead of a big shadow */
+  border-color: #ddd !important; /* Keep the border consistent */
+  cursor: pointer;
 }
 
-/* Fix for Tablet Image Overflow */
-@media (max-width: 1024px) {
-  
-  /* ... existing code ... */
+/* This makes the image break out of the card padding and touch the screen glass */
+.taskContentImageCard {
+  width: 100% !important;
+  margin: 10px 0 !important; /* Spacing above/below */
+  border-radius: 0 !important;
+  max-height: 500px;
+  object-fit: cover; /* Keeps the photo from looking "stretched" */
+}
 
-  .taskContentImageCard {
-    /* DEFAULT: Fits inside the card for iPad */
-    width: 100%;
-    margin: 8px 0; 
-    border-radius: 0;
-    max-height: 500px;
-    object-fit: cover;
-  }
+}
+
+
 
   /* SMALL PHONE ONLY: Re-apply the edge-to-edge effect */
   @media (max-width: 600px) {
     .taskContentImageCard {
       margin: 8px -16px; /* Pulls it to touch screen edges only on phones */
-      width: calc(100% + 32px); 
+      width: calc(100% + 32px);
     }
-    
+
     /* Ensure the card itself doesn't hide the pull-out image */
     .taskInputCardBody {
-      overflow: visible; 
+      overflow: visible;
     }
   }
-}
+
