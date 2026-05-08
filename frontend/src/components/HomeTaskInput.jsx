@@ -13,7 +13,7 @@ const Task = ({ task, deleteTask, isOwner }) => {
 
   return (
     <div className="taskInputCardBody">
-      {/* --- TOP SECTION (Avatar + Name pushed right + Menu) --- */}
+      {/* --- TOP SECTION --- */}
       <div className="taskAvatarCardBody" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div className="taskAvatarcardBackground" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <img
@@ -29,7 +29,7 @@ const Task = ({ task, deleteTask, isOwner }) => {
           </div>
         </div>
 
-        {/* THREE DOT MENU (Far Right) */}
+        {/* THREE DOT MENU */}
         {isOwner && (
           <div className="TaskDotMenuPosition" style={{ position: 'relative' }}>
             <button
@@ -40,17 +40,20 @@ const Task = ({ task, deleteTask, isOwner }) => {
             </button>
 
             {showMenu && (
-              <div className="dotMenuDisplay">
-                <Link to={`/edittask/${uuid}`} className="menuEditButtonStyle">
-                  Edit Post
-                </Link>
-                <button
-                  onClick={() => deleteTask(uuid)}
-                  className="menuDeleteButtonStyle"
-                >
-                  Delete Post
-                </button>
-              </div>
+              <>
+                <div className="menu-backdrop" onClick={() => setShowMenu(false)} />
+                <div className="dotMenuDisplay">
+                  <Link to={`/edittask/${uuid}`} className="menuEditButtonStyle">
+                    Edit Post
+                  </Link>
+                  <button
+                    onClick={() => deleteTask(uuid)}
+                    className="menuDeleteButtonStyle"
+                  >
+                    Delete Post
+                  </button>
+                </div>
+              </>
             )}
           </div>
         )}
@@ -76,7 +79,7 @@ const Task = ({ task, deleteTask, isOwner }) => {
         </div>
       )}
 
-      {/* --- ACTION BAR (Likes kept inside) --- */}
+      {/* --- ACTION BAR --- */}
       <div className="taskActionButtonBar">
         <div className="action-buttons-left">
           <LikeButton task={task} />

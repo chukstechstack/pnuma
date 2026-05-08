@@ -1,34 +1,36 @@
 import React from "react";
-
 const DevBanner = () => {
-  // You can easily update this string whenever you change tasks
   const currentFocus = " mobile screen layout & UI";
 
   return (
     <div
       style={{
+        position: "fixed", // Fix to top
+        top: "60px",
+        left: 0,
+        width: "100%",
+        zIndex: "2000",    // Must be higher than your nav (1000)
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "100%",
+          height: "35px",
       }}
+
     >
       <div
         style={{
-          backgroundColor: "#fff3cd", // Warning yellow
+          backgroundColor: "#fff3cd",
           color: "#856404",
-          padding: "10px 20px",
+          padding: "8px 20px",
+          width: "100%",
           textAlign: "center",
+          fontSize: "12px", // Slightly smaller for mobile
+          fontWeight: "600",
           borderBottom: "1px solid #ffeeba",
-          fontSize: "14px",
-          fontWeight: "500",
-          
+          boxSizing: "border-box"
         }}
       >
-        🚧 <strong>Under Development:</strong> Pneuma is currently being built.
-        Right now, I'm working on:{" "}
-        <span style={{ textDecoration: "underline" }}>{currentFocus}</span>.
-        Expect some dust!
+        🚧 Under Development: working on <span style={{ textDecoration: "underline" }}>{currentFocus}</span>
       </div>
     </div>
   );

@@ -113,7 +113,7 @@ const NavBar = () => {
         <div className="nav-container">
           <div className="nav-logo-section">
             <div className="nav-dove-container">
-              <DoveLogo className="dove-logo-svg" />
+           
               <div className="pneuma-text">Pneuma</div>
             </div>
             <div className="search-input-container">
@@ -174,7 +174,7 @@ const NavBar = () => {
               <span className="notification-red-bar">3</span>
             </div>
 
-            <div className="profile-bar-container">
+            {/* <div className="profile-bar-container">
               <Link to="/profile" className="profile-link-styling">
                 <img
                   src={profileImg}
@@ -183,7 +183,7 @@ const NavBar = () => {
                 />
                 <span className="me-profile-text-me">Me</span>
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       </nav>

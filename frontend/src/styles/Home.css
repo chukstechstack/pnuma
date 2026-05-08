@@ -3,8 +3,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  align-items: center;
-  padding-top: 90px;
+  align-items: flex-start;
+  padding-top: 0px;
   font-family:
     -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", "Fira Sans", Ubuntu, Oxygen, "Oxygen Sans", Cantarell,
@@ -16,13 +16,11 @@
   display: flex;
   width: 100%;
   max-width: 1100px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0 10px;
   gap: 30px;
   align-items: flex-start;
   justify-content: flex-start;
   margin: 0 auto;
- 
 }
 
 .profileBody {
@@ -44,11 +42,6 @@
   transition: box-shadow 0.2s ease;
 }
 
-.profileBackground:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #bb8811 !important;
-}
-
 .profileBanner {
   width: 100%;
   height: 60px;
@@ -56,11 +49,11 @@
 }
 
 .profileBannerImage {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   border: 3px solid white;
-  margin-top: -35px;
+  margin-top: -25px;
   object-fit: cover;
 }
 
@@ -118,18 +111,13 @@
   gap: 10px;
   min-height: 70px;
   width: 100%;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
   box-sizing: border-box;
-
 }
 
-.profileBackground:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-color: #bb8811 !important;
-}
 .feedImage {
-  width: 38px;
-  height: 38px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -156,8 +144,6 @@
   position: relative;
 }
 
-
-
 .feedCardBackground .shareTestimonyButton:active {
   background-color: #e2e1df !important;
 }
@@ -169,51 +155,45 @@
 }
 
 /* --- Home Input Styling --- */
-
-.menuEditButtonStyle {
+.menuEditButtonStyle,
+.menuDeleteButtonStyle {
   width: 100%;
-  padding: 10px;
-  border: none;
-  background: none;
-  text-align: left;
-  cursor: pointer;
+  padding: 12px 16px; /* Roomy padding for fat fingers on mobile */
   font-size: 14px;
-  display: block;
-  text-decoration: none;
-  color: #bb8811;
-  font-weight: bold;
-  transition: background-color 0.15s ease;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space for an icon if you add one later */
+  transition: background-color 0.2s ease;
+  border: none;
+}
+
+/* Edit Style */
+.menuEditButtonStyle {
+  color: rgba(0, 0, 0, 0.7);
 }
 
 .menuEditButtonStyle:hover {
-  background-color: #f5f5f5;
+  background-color: #f3f3f3;
+  color: rgba(0, 0, 0, 0.9);
 }
 
+/* Delete Style */
 .menuDeleteButtonStyle {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-  font-size: 14px;
-  display: block;
-  text-decoration: none;
-  color: red;
-  border-top: 1px solid #eee;
-  transition: background-color 0.15s ease;
+  color: #cc1016; /* Professional red */
+  border-top: 1px solid #eee; /* Divider line */
 }
 
 .menuDeleteButtonStyle:hover {
-  background-color: #fff0f0;
+  background-color: #fff5f5;
 }
 
 /* --- Task Card Styles --- */
 
 .taskInputCardBody {
-  background-color: white;
+  background-color: white !important;
   border: 1px solid #ddd;
-  box-shadow: none;
+  box-shadow: none !important;
   border-radius: 0px;
   padding: 16px;
   margin-bottom: 0px;
@@ -221,10 +201,8 @@
   flex-direction: column;
   gap: 0px;
   position: relative;
-
+  cursor: default !important;
 }
-
-
 
 .taskAvatarCardBody {
   display: flex;
@@ -237,7 +215,7 @@
   align-items: center;
   gap: 10px;
   flex: 1;
-   min-width: 0;
+  min-width: 0;
 }
 
 .taskAvatarcardBackground > div {
@@ -256,11 +234,8 @@
 
 .taskAuthorName {
   font-size: 14px;
-  /* LinkedIn names are actually slightly smaller but bold */
   font-weight: 600;
-  /* Semi-bold, not full 900 */
   color: rgba(0, 0, 0, 0.9);
-  /* Almost black, but softer */
   line-height: 1.2;
   display: block;
 }
@@ -290,20 +265,85 @@
   color: #666 !important;
   box-shadow: none !important;
   outline: none !important;
+  margin-right: 8px;
   -webkit-tap-highlight-color: transparent !important;
 }
 
+/* Container styling */
+.menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2000; 
+  background: transparent;
+}
 .dotMenuDisplay {
   position: absolute;
-  right: 0;
-  top: 30px;
+  right: 16px;
+  top: 40px;
   background-color: white;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 100;
-  width: 140px;
+  width: 160px;
   overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Base style for both Link and Button */
+.menuEditButtonStyle {
+  width: 100%;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  text-decoration: none; /* Removes underline from Link */
+  display: block;
+  border: none; /* Removes default button border */
+  background: white; /* Ensures background is solid */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-sizing: border-box; /* Crucial for padding to work correctly */
+}
+
+/* Edit Post - Subtle Grey */
+.menuEditButtonStyle {
+  color: rgba(29, 48, 66, 0.7);
+}
+
+.menuEditButtonStyle:hover {
+  background-color: #bab5b5;
+}
+
+/* Delete Post - Professional Red */
+.menuDeleteButtonStyle {
+  width: 100%;
+  /* Pushing the text in: 12px top/bottom, 24px left (pushed right), 16px right */
+  padding: 10px 16px 10px 24px !important;
+
+  /* Making it smaller and cleaner */
+  font-size: 13px !important;
+  font-weight: 600; /* Medium weight looks cleaner than bold at small sizes */
+
+  color: #cc1016 !important;
+  background-color: white;
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: none !important;
+  border-radius: 0 !important; /* Removes any default rounding */
+  -webkit-appearance: none;
+}
+
+.menuDeleteButtonStyle:hover {
+  background-color: #bab5b5;
 }
 
 .postTextContent {
@@ -336,7 +376,6 @@
   background: linear-gradient(to right, rgba(255, 255, 255, 0), white 100%);
 }
 
-
 /* Target only buttons inside your feed column */
 .feedCardBodyWidth button {
   background: none;
@@ -363,28 +402,26 @@
 .showMoreText:hover {
   text-decoration: underline;
 }
-
 .taskContentImageCard {
-  width: calc(100% + 32px); /* Offsets the 16px padding on both sides */
-  margin-left: -16px;      /* Pulls the image to the left edge */
-  margin-right: -16px;     /* Pulls the image to the right edge */
-  height: 450px;           
+  width: calc(100% + 32px) !important;
+  margin-left: -16px !important;
+  margin-right: -16px !important;
+  height: 450px !important;
+  max-height: 500px;
   object-fit: cover;
   display: block;
-  margin-top: 12px;        /* Space between text and image */
+  margin-top: 12px;
   border: none;
 }
 
-
-
 .taskActionButtonBar {
   display: flex;
-  justify-content: space-between; /* Pushes buttons left, count right */
+  justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
   border-top: 1px solid #e0e0e0;
-    width: 100%; /* Force it to stay within parent */
-  box-sizing: border-box; /* Include padding in width */
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .action-buttons-left {
@@ -394,19 +431,26 @@
 
 .actionButton {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 6px; /* Space between icon and word */
-  background: none;
-  border: none;
-  color: #666666;
-  font-weight: 600;
-  padding: 8px;
+  justify-content: center;
+  padding: 8px 12px;
   border-radius: 4px;
   cursor: pointer;
+  transition: background 0.2s ease;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 10px;
+  gap: 4px;
 }
 
 .actionButton:hover {
-  background-color: #f3f3f3;
+  background-color: rgba(0, 0, 0, 0.08);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.actionButton svg {
+  width: 20px;
+  height: 24px;
 }
 
 .total-likes-count {
@@ -414,100 +458,247 @@
   color: #666666;
 }
 
-/* Mobile Top Nav (Profile + Search + Messaging Icon) */
 .mobile-top-nav {
-  display: none; /* Hidden on PC */
+  display: none;
 }
 
-
-
 /* UNIFIED MOBILE & TABLET LAYOUT (LinkedIn Vanilla Style) */
-@media (max-width: 1024px) {
-  /* 1. LAYOUT & BODY RESET */
+
+@media (max-width: 700px) {
   .homePageBody {
-   padding: 0 !important; /* Matches Bottom Nav height */
+    padding-top: 85px !important;
+  }
+}
+
+.homebody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  max-width: 100%;
+  margin: 0 auto;
+  gap: 0;
+}
+
+.profileBody {
+  display: none !important;
+}
+
+.feedCardBodyWidth {
   width: 100%;
-  margin: 0;
+  max-width: 600px;
+  flex: none;
+}
+
+/* 2. TOP STICKY NAV */
+.mobile-top-nav {
+  display: flex;
+  position: fixed;
+  top: 35px;
+  width: 100%;
+  height: 50px;
+  background: white;
+  border-bottom: 1px solid #e0e0e0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.mobile-search-trigger {
+  background: #eef3f8;
+  border-radius: 4px;
+  flex: 1;
+  margin: 0 15px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.taskAvatarCardBody {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0 16px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.taskAvatarcardBackground {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.mobile-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e0e0e0;
+}
+
+/* 3. BOTTOM STICKY NAV */
+.mobile-bottom-nav {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 56px;
+  background: white;
+  border-top: 1px solid #e0e0e0;
+  z-index: 1000;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.nav-item {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #666;
+  font-size: 10px;
+  gap: 2px;
+}
+
+.nav-item svg {
+  stroke: currentColor;
+  width: 24px;
+  height: 24px;
+  stroke-width: 2;
+}
+
+.nav-item.active {
+  color: #000000;
+  font-weight: 600;
+}
+
+.postTextContent {
+  padding: 8px 16px !important;
+  box-sizing: border-box;
+}
+.feedCardBackground {
+  margin-top: 0px !important;
+  border-top: 1px solid #e0e0e0 !important;
+}
+
+.feedCardBackground {
+  margin: 0 0 8px 0 !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.taskInputCardBody {
+  background: #ffffff;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  margin: 8px 12px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #e0e0e0 !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.taskCardBody {
+  gap: 0px !important;
+}
+
+.taskActionButtonBar {
+  box-sizing: border-box;
+  padding: 8px 16px;
+}
+
+.actionButton {
+  flex-direction: column;
+  font-size: 11px;
+  gap: 4px;
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+
+.taskAuthorName {
+  font-size: 15px;
+}
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background: #cc1016;
+  color: white;
+  font-size: 10px;
+  border-radius: 10px;
+  padding: 1px 5px;
+}
+
+.main-nav {
+  display: none !important;
+}
+.taskInputCardBody:hover {
+  background-color: #f9f9f9;
+  border-color: #ddd !important;
+  cursor: pointer;
+}
+
+.taskContentImageCard {
+  width: calc(100% + 32px) !important;
+  margin-left: -16px !important;
+  margin-right: -16px !important;
+  max-width: none !important;
+  height: auto !important;
+  display: block;
+  object-fit: cover;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 1024px) {
+  .homePageBody {
+    padding-top: 95px !important;
+    width: 100%;
+    margin: 0;
+  }
+  .feedCardBackground {
+    display: none !important;
   }
 
   .homebody {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0;
-    max-width: 100%;
-    margin: 0 auto;
-    gap: 0; /* Tighten gaps for mobile */
+    gap: 0;
   }
 
   .profileBody {
-    display: none !important; /* Remove sidebar for cleaner feed */
+    display: none !important;
   }
 
-  .feedCardBodyWidth {
-    width: 100%;
-    max-width: 600px; /* Caps width on iPads so it doesn't look stretched */
-    flex: none;
-  }
-
-  /* 2. TOP STICKY NAV */
   .mobile-top-nav {
     display: flex;
     position: fixed;
-    top: 0;
+    top: 35px;
     width: 100%;
     height: 50px;
     background: white;
     border-bottom: 1px solid #e0e0e0;
     z-index: 1000;
     align-items: center;
-    justify-content: space-between;
     padding: 0 12px;
     box-sizing: border-box;
   }
 
-  .mobile-search-trigger {
-    background: #eef3f8;
-    border-radius: 4px;
-    flex: 1;
-    margin: 0 15px;
-    padding: 7px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #666;
-    font-size: 14px;
-  }
-/* 1. Ensure the header spans the full width and stays inside */
-.taskAvatarCardBody {
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  padding: 0 16px !important; /* Gives breathing room from screen edges */
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-/* 2. Fix the name container so it doesn't shove the dots off-screen */
-.taskAvatarcardBackground {
-  display: flex !important;
-  flex-direction: row !important; /* Keeps name next to profile pic */
-  align-items: center !important;
-  gap: 10px !important;
-  flex: 1 !important;
-  min-width: 0 !important; /* This is the secret sauce for mobile alignment */
-}
-
-
-  .mobile-avatar {
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #e0e0e0;
-  }
-
-  /* 3. BOTTOM STICKY NAV */
   .mobile-bottom-nav {
     display: flex;
     position: fixed;
@@ -518,141 +709,82 @@
     border-top: 1px solid #e0e0e0;
     z-index: 1000;
     justify-content: space-around;
-    align-items: center;
     padding-bottom: env(safe-area-inset-bottom);
   }
 
-  .nav-item {
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: #666;
-    font-size: 10px;
-    gap: 2px;
+  .taskContentImageCard {
+    width: calc(100% + 32px) !important;
+    margin: 10px -16px !important;
+    max-width: none !important;
+    border-radius: 0 !important;
+    height: auto !important;
+    object-fit: cover;
   }
 
-  .nav-item svg {
-    stroke: currentColor;
-    width: 24px;
-    height: 24px;
-    stroke-width: 2; /* Mature, thin lines */
-  }
-
-  .nav-item.active {
-    color: #000000;
-    font-weight: 600;
-  }
-
-  .postTextContent {
-  padding: 8px 16px !important; /* Matches the header padding for a clean line */
-  box-sizing: border-box;
-}
-    .feedCardBackground {
-    margin-top: 0px !important; 
-    border-top: 1px solid #e0e0e0 !important;
-  }
-  
-    .feedCardBackground {
-    margin: 0 0 8px 0 !important; /* This is the "Gap Killer" */
-    width: 100% !important;
+  .taskInputCardBody {
+    overflow: visible;
     border-radius: 0 !important;
     border-left: none !important;
     border-right: none !important;
-    border-top: none !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
   }
 
-.taskInputCardBody {
-  margin: 0 0 8px 0 !important;
-  width: 100% !important;
-  border-radius: 0 !important;
-  border-left: none !important;
-  border-right: none !important;
-  border-top: none !important;
-  box-shadow: none !important;
-  /* ADD THIS LINE BELOW */
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+  .dotMenuDisplay {
+    right: 12px !important; /* Ensures the dropdown doesn't hug the screen edge */
+  }
+
+  .taskDotButton {
+    padding-right: 8px !important; /* Adds space inside the button click area */
+    margin-right: 18px !important; /* Pushes the button away from the edge */
+  }
 }
 
-    .taskCardBody {
-    gap: 0px !important; 
-  }
-.taskContentImageCard {
-  width: 100% !important;
-  margin: 10px 0 !important;
-  border-radius: 0 !important;
-  max-height: 500px;
-  object-fit: cover;
-}
-
-/* Removes the share box on mobile since the nav button handles posting */
-.feedCardBackground {
-  display: none !important;
-}
-
-  /* 6. ACTION BUTTONS & TEXT */
-  .taskActionButtonBar {
-  box-sizing: border-box;
-    padding: 8px 16px;
+/* ==========================================
+   2. DESKTOP RESTORE (1025px and up)
+   ========================================== */
+@media (min-width: 1025px) {
+  .homebody {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    gap: 24px !important;
+    max-width: 1128px;
+    margin: 0 auto !important;
+    padding-top: 80px !important;
   }
 
-  .actionButton {
-    flex-direction: column; /* Icon over text for mobile maturity */
-    font-size: 11px;
-    gap: 4px;
-    color: rgba(0, 0, 0, 0.6) !important;
+  .profileBody {
+    display: block !important;
+    width: 225px !important;
+    flex-shrink: 0;
+    position: sticky;
+    top: 80px;
   }
 
-  .taskAuthorName {
-    font-size: 15px;
-  }
-  .badge {
-    position: absolute;
-    top: -5px;
-    right: -8px;
-    background: #cc1016;
-    color: white;
-    font-size: 10px;
-    border-radius: 10px;
-    padding: 1px 5px;
+  .feedCardBodyWidth {
+    width: 555px !important;
   }
 
-  /* Hide Desktop Nav */
   .main-nav {
+    display: flex !important;
+  }
+
+  /* Hide mobile bars on PC */
+  .mobile-top-nav,
+  .mobile-bottom-nav {
     display: none !important;
   }
-  .taskInputCardBody:hover {
-  background-color: #f9f9f9; /* Subtle color change instead of a big shadow */
-  border-color: #ddd !important; /* Keep the border consistent */
-  cursor: pointer;
-}
 
-/* This makes the image break out of the card padding and touch the screen glass */
-.taskContentImageCard {
-  width: 100% !important;
-  margin: 10px 0 !important; /* Spacing above/below */
-  border-radius: 0 !important;
-  max-height: 500px;
-  object-fit: cover; /* Keeps the photo from looking "stretched" */
-}
-
-}
-
-
-
-  /* SMALL PHONE ONLY: Re-apply the edge-to-edge effect */
-  @media (max-width: 600px) {
-    .taskContentImageCard {
-      margin: 8px -16px; /* Pulls it to touch screen edges only on phones */
-      width: calc(100% + 32px);
-    }
-
-    /* Ensure the card itself doesn't hide the pull-out image */
-    .taskInputCardBody {
-      overflow: visible;
-    }
+  .homePageBody {
+    padding-top: 0 !important;
   }
 
+  .taskDotButton {
+    padding-right: 10px !important; /* Adds space inside the button click area */
+    margin-right: 10px !important; /* Pushes the button away from the edge */
+  }
+
+  .dotMenuDisplay {
+    right: 12px !important; /* Ensures the dropdown doesn't hug the screen edge */
+  }
+}
