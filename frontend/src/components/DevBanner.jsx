@@ -1,6 +1,6 @@
 import React from "react";
 const DevBanner = () => {
-  const currentFocus = " mobile screen layout & UI";
+  const currentFocus = " Optimization with  Redis + Sharp + basic AWS S3, CloudFront, React.lazy() + Suspense ";
 
   return (
     <div
@@ -24,7 +24,7 @@ const DevBanner = () => {
           padding: "8px 20px",
           width: "100%",
           textAlign: "center",
-          fontSize: "12px", // Slightly smaller for mobile
+          fontSize: "15px", // Slightly smaller for mobile
           fontWeight: "600",
           borderBottom: "1px solid #ffeeba",
           boxSizing: "border-box"

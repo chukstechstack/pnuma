@@ -605,8 +605,8 @@
 .taskInputCardBody {
   background: #ffffff;
   border-radius: 12px !important;
-  padding: 12px 16px !important;
-  margin: 8px 12px !important;
+  padding: 30px 16px !important;
+  margin: 14px 12px !important;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
   border: 1px solid #e0e0e0 !important;
   display: flex;
