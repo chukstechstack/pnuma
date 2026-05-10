@@ -1,6 +1,7 @@
 import React from "react";
 const DevBanner = () => {
-  const currentFocus = " Finished Optimization with  Redis + Sharp + basic AWS S3, CloudFront, now working on Message feature";
+  const currentFocus =
+    "Message feature Frontend: React + Socket.io-client. || Backend: Node.js + Socket.io + Redis (for scaling) + Postgres (for history). ";
 
   return (
     <div
@@ -9,13 +10,12 @@ const DevBanner = () => {
         top: "60px",
         left: 0,
         width: "100%",
-        zIndex: "2000",    // Must be higher than your nav (1000)
+        zIndex: "2000", // Must be higher than your nav (1000)
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-          height: "35px",
+        height: "35px",
       }}
-
     >
       <div
         style={{
@@ -27,10 +27,11 @@ const DevBanner = () => {
           fontSize: "15px", // Slightly smaller for mobile
           fontWeight: "600",
           borderBottom: "1px solid #ffeeba",
-          boxSizing: "border-box"
+          boxSizing: "border-box",
         }}
       >
-        🚧 Under Development: working on <span style={{ textDecoration: "underline" }}>{currentFocus}</span>
+        🚧 Under Development: working on{" "}
+        <span style={{ textDecoration: "underline" }}>{currentFocus}</span>
       </div>
     </div>
   );
