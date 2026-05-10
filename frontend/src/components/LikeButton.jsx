@@ -14,7 +14,7 @@ const LikeButton = ({ task }) => {
       const res = await api.post(`/task/${task.uuid}/likes`);
       toggleLikeInState(task.uuid, res.data.liked);
     } catch (err) {
-      toast.error("Could not process like");
+      toast.error("Could not process like", err);
     }
   };
 

@@ -1,6 +1,6 @@
 import React from "react";
 const DevBanner = () => {
-  const currentFocus = " Optimization with  Redis + Sharp + basic AWS S3, CloudFront, React.lazy() + Suspense ";
+  const currentFocus = " Finished Optimization with  Redis + Sharp + basic AWS S3, CloudFront, now working on Message feature";
 
   return (
     <div

@@ -5,6 +5,7 @@ import TaskInputError from "../utils/taskInputError.js";
 import sharp from "sharp";
 import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import s3 from "../config/s3.js";
+import redisClient from "../config/redis.js";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -74,7 +75,10 @@ const createTask = [
         where c.id = $1`,
         [newPostId],
       );
-
+      // 2. 🔥 THE REDIS PART: Delete the old cache
+      // We use the same key pattern we used in getTask
+      await redisClient.del(`tasks_feed:${user_id}`);
+      console.log(`🗑️ Cache busted for user: ${user_id}`);
       res.json({
         message: "Content created successfully",
         newTask: resultWithUser.rows[0],
@@ -86,8 +90,17 @@ const createTask = [
 ];
 
 const getTask = async (req, res, next) => {
-  const user_id = req.user?.id; // Get current user ID from auth middleware
+  const user_id = req.user?.id;
+  const cacheKey = `tasks_feed:${user_id || 'guest'}` // Get current user ID from auth middleware
   try {
+
+    const cachedData = await redisClient.get(cacheKey);
+    if (cachedData) {
+      console.log(" ⚡ Redis Hit: Serving feed from cache")
+      return res.json(JSON.parse(cachedData));
+    }
+
+    console.log("🐢 Redis Miss: Fetching from Postgres");
     const result = await pool.query(
       `SELECT 
     c.*, 
@@ -101,7 +114,10 @@ const getTask = async (req, res, next) => {
    ORDER BY c.created_at DESC`,
       [user_id],
     );
-    res.json({ tasks: result.rows, currentUserId: user_id });
+    const responseData = { tasks: result.rows, currentUserId: user_id };
+
+    await redisClient.set(cacheKey, JSON.stringify(responseData), { EX: 600 })
+    res.json(responseData)
   } catch (err) {
     next(err);
   }
@@ -113,7 +129,7 @@ const deleteTask = async (req, res, next) => {
   const { uuid } = req.params;
   const user_id = req.user.id;
   try {
-
+    // 1. Check if it exists and get the image for S3 cleanup
     const taskResult = await pool.query(
       "SELECT img FROM content WHERE uuid = $1 AND user_id = $2",
       [uuid, user_id]
@@ -124,6 +140,7 @@ const deleteTask = async (req, res, next) => {
 
     const imgUrl = taskResult.rows[0].img;
 
+    //3 AWS S3 Cleanup
     if (imgUrl) {
       // 5. Dynamic Split: We split by the bucket name variable
       const bucketIdentifier = `${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/`;
@@ -145,6 +162,13 @@ const deleteTask = async (req, res, next) => {
     if (result.rowCount === 0) {
       return res.status(403).json({ error: "You are unauthorized" });
     }
+
+    // 4. REDIS INVALIDATION: Rip up the "Post-it note" so the refresh is clean
+    const cacheKey = `tasks_feed:${user_id}`;
+    await redisClient.del(cacheKey);
+    console.log("🗑️ Redis Cache cleared for user:", user_id);
+
+
     res.status(200).json({ message: "Deleted successfully" });
   } catch (err) {
     next(err);
@@ -241,6 +265,12 @@ const patchTask = [
 
       const result = await pool.query(query, values);
       if (result.rowCount === 0) throw new TaskInputError("Post not found");
+      
+      // 7. 🔥 THE REDIS PART: Invalidate the cache
+      // We kill the cache so the updated text/image shows up on the next fetch
+      await redisClient.del(`tasks_feed:${user_id}`);
+      console.log("🗑️ Redis Cache cleared after patch/update");
+
       res.json({
         message: "updated successfully",
         updatedTask: result.rows[0],

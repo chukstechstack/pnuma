@@ -7,6 +7,8 @@ import session from "express-session";
 import pgSession from "connect-pg-simple";
 import cors from "cors";
 import mainTaskRouter from "./routes/main/maintaskrouter.js";
+import  redisClient from "./config/redis.js";
+
 
 
 // import crypto from "crypto";
@@ -87,6 +89,9 @@ const startServer = async () => {
   try {
     await pool.connect();
     console.log("✅ Connected to Supabase PostgreSQL");
+
+    await redisClient.connect();
+    console.log(" 🚀 Connected to Redis")
 
     app.listen(PORT, () => {
       console.log(`🚀 Server running at http://localhost:${PORT}`);
