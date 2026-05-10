@@ -2,6 +2,9 @@ import pool from "../config/db.js";
 import { createClient } from "@supabase/supabase-js";
 import multer from "multer";
 import TaskInputError from "../utils/taskInputError.js";
+import sharp from "sharp";
+import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import s3 from "../config/s3.js";
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -15,45 +18,50 @@ const upload = multer({
 });
 
 const createTask = [
+  // 1. RECEIVE: Multer intercepts the multipart form and puts the image into RAM (req.file.buffer)
   upload.single("img"), // parse file
   async (req, res, next) => {
+    // 2. VALIDATE: Ensure the user actually sent content before wasting resources on images
     const { content } = req.body; // <-- include tags here
     const user_id = req.user.id;
-    let img_url = "https://source.unsplash.com/random/300x300?avatar";
+    let img_url = null;
 
     try {
       if (!content) throw new TaskInputError("Content is required");
-
+      // 3. TRANSFORM: Use Sharp to downsample (resize) and transcode (convert to WebP) in-memory
       if (req.file) {
-        // Upload image to Supabase Storage
-        const { data, error } = await supabase.storage
-          .from("task-images")
-          .upload(
-            `tasks/${Date.now()}-${req.file.originalname}`,
-            req.file.buffer,
-            {
-              contentType: req.file.mimetype,
-            },
-          );
 
-        if (error) throw error;
+        // We take the raw buffer and transform it IN MEMORY
+        const optimizedBuffer = await sharp(req.file.buffer)
+          .resize({ width: 800, withoutEnlargement: true }) // Don't stretch small images
+          .webp({ quality: 80 })                           // Convert to WebP
+          .toBuffer();                                     // Output back to a Buffer
 
-        // Get public URL
-        const { data: publicData } = supabase.storage
-          .from("task-images")
-          .getPublicUrl(data.path);
+        // 4. PREPARE: Generate a unique timestamped filename to prevent naming collisions
+        const fileName = `tasks/${Date.now()}-optimized.webp`; // Notice the .webp extension
 
-        img_url = publicData.publicUrl;
+        // 5. PERSIST (AWS s3)
+        const uploadParams = {
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: fileName,
+          Body: optimizedBuffer,
+          ContentType: "image/webp"
+        }
+
+        await s3.send(new PutObjectCommand(uploadParams));
+        // 3. RESOLVE (AWS URL Pattern)
+        // S3 URLs follow a very predictable pattern:
+        img_url = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
+
       }
-
-      // Insert into Postgres
+      // 7. PERSIST (Database): Save the text content and the image URL to Postgres
       const result = await pool.query(
         `INSERT INTO content(content, img, user_id )
          VALUES($1, $2, $3) RETURNING *`,
         [content, img_url, user_id],
       );
 
-      const newPostId = result.rows[0].id
+      const newPostId = result.rows[0].id;
       const resultWithUser = await pool.query(
         `select c.*,
         c.user_id,
@@ -63,9 +71,9 @@ const createTask = [
         false As is_liked
         FROM content c
         join profiles p on c.user_id = p.id
-        where c.id = $1`, [newPostId]
-
-      )
+        where c.id = $1`,
+        [newPostId],
+      );
 
       res.json({
         message: "Content created successfully",
@@ -91,7 +99,7 @@ const getTask = async (req, res, next) => {
    FROM content c 
    LEFT JOIN profiles p ON c.user_id = p.id 
    ORDER BY c.created_at DESC`,
-      [user_id]
+      [user_id],
     );
     res.json({ tasks: result.rows, currentUserId: user_id });
   } catch (err) {
@@ -99,10 +107,37 @@ const getTask = async (req, res, next) => {
   }
 };
 
+
+
 const deleteTask = async (req, res, next) => {
   const { uuid } = req.params;
   const user_id = req.user.id;
   try {
+
+    const taskResult = await pool.query(
+      "SELECT img FROM content WHERE uuid = $1 AND user_id = $2",
+      [uuid, user_id]
+    );
+    if (taskResult.rowCount === 0) {
+      return res.status(403).json({ error: "you are unauthorized or task not found" })
+    }
+
+    const imgUrl = taskResult.rows[0].img;
+
+    if (imgUrl) {
+      // 5. Dynamic Split: We split by the bucket name variable
+      const bucketIdentifier = `${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/`;
+      const filePath = imgUrl.split(bucketIdentifier)[1];
+
+      if (filePath) {
+        const deleteParams = {
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: filePath
+        };
+        await s3.send(new DeleteObjectCommand(deleteParams));
+        console.log(`AWS S3 cleanup success: ${filePath}`);
+      }
+    }
     const result = await pool.query(
       `delete from content where uuid = $1 AND user_id = $2`,
       [uuid, user_id],
@@ -116,6 +151,8 @@ const deleteTask = async (req, res, next) => {
     console.log(err);
   }
 };
+
+
 
 const getEditPage = async (req, res, next) => {
   const uuid = req.params.uuid;
@@ -135,7 +172,9 @@ const getEditPage = async (req, res, next) => {
   }
 };
 
+
 const patchTask = [
+  // 1. RECEIVE: Capture file and UUID
   upload.single("img"),
   async (req, res, next) => {
     const { uuid } = req.params;
@@ -151,26 +190,47 @@ const patchTask = [
       }
 
       if (req.file) {
-        const { data, error } = await supabase.storage
-          .from("task-images")
-          .upload(
-            `tasks/${Date.now()}-${req.file.originalname}`,
-            req.file.buffer,
-            {
-              contentType: req.file.mimetype,
-            },
-          );
+        // 2. LOOKUP: Get old image URL
+        const oldTask = await pool.query(
+          "SELECT img FROM content WHERE uuid = $1 AND user_id = $2",
+          [uuid, user_id]
+        );
+        const oldImgUrl = oldTask.rows[0]?.img;
 
-        if (error) throw error;
+        // 3. CLEANUP: Delete old file from S3
+        if (oldImgUrl) {
+          const bucketIdentifier = ".amazonaws.com/";
+          const filePath = oldImgUrl.split(bucketIdentifier)[1];
+          if (filePath) {
+            await s3.send(new DeleteObjectCommand({
+              Bucket: process.env.AWS_BUCKET_NAME,
+              Key: filePath
+            }));
+          }
+        }
 
-        const { data: publicData } = supabase.storage
-          .from("task-images")
-          .getPublicUrl(data.path);
+        // 4. TRANSFORM: Sharp (Resize + WebP)
+        const optimizedBuffer = await sharp(req.file.buffer)
+          .resize({ width: 800, withoutEnlargement: true })
+          .webp({ quality: 80 })
+          .toBuffer();
+
+        // 5. UPLOAD: Save to AWS S3 (Fixed from Supabase)
+        const fileName = `tasks/${Date.now()}-optimized.webp`;
+        await s3.send(new PutObjectCommand({
+          Bucket: process.env.AWS_BUCKET_NAME,
+          Key: fileName,
+          Body: optimizedBuffer,
+          ContentType: "image/webp"
+        }));
+
+        // 6. UPDATE PATH: Construct the new URL
+        const newUrl = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;
         updates.push(`img = $${updates.length + 1}`);
-        values.push(publicData.publicUrl);
+        values.push(newUrl); // Fixed variable name
       }
 
-      if (updates.length === 0) throw new TaskInputError("Post not found");
+      if (updates.length === 0 && !req.body.content) throw new TaskInputError("No Changes Provided");
 
       values.push(uuid, user_id);
       const query = `

@@ -9,6 +9,7 @@ import {
 } from "../controllers/authControllers.js";
 import TaskInputError from "../utils/taskInputError.js";
 
+
 const authRouter = express.Router();
 
 export const ensureAuthenticated = (req, res, next) => {
