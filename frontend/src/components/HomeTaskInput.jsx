@@ -11,7 +11,7 @@ const Task = ({ task, deleteTask, isOwner }) => {
   const textLimit = 123;
   const shouldShowMore = content.length > textLimit;
 
-  return (
+  return(
     <div className="taskInputCardBody">
       {/* --- TOP SECTION --- */}
       <div className="taskAvatarCardBody" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>

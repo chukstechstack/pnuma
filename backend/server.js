@@ -25,23 +25,23 @@ const allowedOrigins = [
   process.env.FRONTEND_URL                      
 ];
 
-app.use(cors({
+// Define once
+const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl)
     if (!origin) return callback(null, true);
-
-    // Check if the origin is in our whitelist
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      console.log("CORS blocked this origin:", origin); // Check Render logs for this!
+      console.log("CORS blocked this origin:", origin);
       callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true
-}));
+};
 
-app.options('/*splat', cors()); 
+// Use everywhere
+app.use(cors(corsOptions));
+app.options('/*splat', cors(corsOptions)); // ✅ same config, not bare cors();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -62,7 +62,7 @@ app.use(
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 1000 * 60 * 60,
+      maxAge: 1000 * 60 * 60 * 24 * 5,
     },
     proxy: true
   })
