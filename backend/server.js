@@ -7,7 +7,7 @@ import session from "express-session";
 import pgSession from "connect-pg-simple";
 import cors from "cors";
 import mainTaskRouter from "./routes/main/maintaskrouter.js";
-import  redisClient from "./config/redis.js";
+import redisClient from "./config/redis.js";
 
 
 
@@ -20,20 +20,20 @@ const app = express();
 const PostgresStore = pgSession(session)
 
 const allowedOrigins = [
-  'https://pneuma-frontend-oijl.onrender.com', 
-  'http://localhost:5173',                     
-  process.env.FRONTEND_URL                      
+  'https://pneuma-frontend-oijl.onrender.com',
+  'http://localhost:5173',
+  process.env.FRONTEND_URL
 ];
 
 // Define once
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin) return callback(null, true);
+  origin: function (origin, done) {
+    if (!origin) return done(null, true);
     if (allowedOrigins.includes(origin)) {
-      callback(null, true);
+      done(null, true);
     } else {
       console.log("CORS blocked this origin:", origin);
-      callback(new Error('Not allowed by CORS'));
+      done(new Error('Not allowed by CORS'));
     }
   },
   credentials: true
@@ -41,32 +41,40 @@ const corsOptions = {
 
 // Use everywhere
 app.use(cors(corsOptions));
-app.options('/*splat', cors(corsOptions)); // ✅ same config, not bare cors();
+app.options('/*info', cors(corsOptions)); // ✅ same config, not bare cors();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.enable('trust proxy'); // Add this line!
+// app.set('trust proxy', true);
 
+// Separate the Database Store Instance
+const sessionStore = new PostgresStore({
+  pool: pool,
+  tableName: 'session',
+  createTableIfMissing: true
+});
 
-app.use(
-  session({
-    store: new PostgresStore({
-      pool: pool,
-      tableName: 'session',
-      createTableIfMissing: true
-    }),
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-      maxAge: 1000 * 60 * 60 * 24 * 5,
-    },
-    proxy: true
-  })
-)
+//  Separate the Cookie Configuration Object
+const isProduction = process.env.NODE_ENV === "production"
+const sessionCookieConfig = {
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "none" : "lax",
+  maxAge: 1000 * 60 * 60 * 24 * 5,  // 5 days
+}
+
+//  Initialize the Final Middleware
+const sessionOptions = {
+  store: sessionStore,
+  cookie: sessionCookieConfig,
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  proxy: true
+}
+
+app.use(session(sessionOptions))
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -93,9 +101,7 @@ const startServer = async () => {
     await redisClient.connect();
     console.log(" 🚀 Connected to Redis")
 
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running at http://localhost:${PORT}`);
-    });
+    app.listen(PORT, () => console.log(`🚀 Server running at PORT: ${PORT}`));
   } catch (err) {
     console.error("❌ Failed to connect:", err.message);
     process.exit(1);

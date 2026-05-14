@@ -1,36 +1,18 @@
 import express from "express";
 import passport from "../config/passport.js";
-import {
-  registerUser,
-  loginUser,
-  logoutUser,
-  googleCallBack,
-  googleLogin
-} from "../controllers/authControllers.js";
-import TaskInputError from "../utils/taskInputError.js";
-
+import { registerUser } from "../controllers/auth/registerUser.js";
+import { loginUser } from "../controllers/auth/loginUser.js";
+import { logoutUser } from "../controllers/auth/logoutUser.js";
+import { googleLogin, googleCallBack } from "../controllers/auth/googleAuth.js";
 
 const authRouter = express.Router();
-
-export const ensureAuthenticated = (req, res, next) => {
-  if (!req.user) {
-    throw new TaskInputError("Unauthorized access, Please log in.", 401);
-  }
-  next();
-};
-
 
 authRouter.post("/register", registerUser);
 authRouter.post("/login", loginUser); 
 authRouter.post("/logout", logoutUser);
 authRouter.get("/google/callback", googleCallBack);
-authRouter.get("/auth/google", googleLogin);
 
-authRouter.get(
-  "/google",
-  passport.authenticate("google", {
-    scope: ["email", "profile"],
-  }),
-);
+// Cleaned: This automatically maps to http://localhost:3000/auth/google
+authRouter.get("/google", googleLogin);
 
 export { authRouter };

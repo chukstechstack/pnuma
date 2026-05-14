@@ -1,4 +1,4 @@
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import TaskContext from "../context/TaskContext.jsx";
 import { useContext } from "react";
 import api from "../api/axios.js";
@@ -6,11 +6,10 @@ import Task from "../components/HomeTaskInput.jsx";
 import LikeButton from "../components/LikeButton";
 import NavBar from "../components/NavBar";
 import "../styles/Home.css";
-import DevBanner from '../components/DevBanner'
+import DevBanner from "../components/DevBanner";
 
 const HomePage = () => {
   const { tasks, deleteTaskFromState, currentUserId } = useContext(TaskContext);
-  const navigate = useNavigate();
 
   // const logout = async () => {
   //   try {
@@ -33,7 +32,7 @@ const HomePage = () => {
   };
   return (
     <div className="homePageBody">
-          <DevBanner />
+      <DevBanner />
       <NavBar />
 
       <div className="homebody">
@@ -66,21 +65,17 @@ const HomePage = () => {
         {/* --- Feed Card  --- */}
         {/* Moved this OUTSIDE of the sidebar div */}
         <div className="feedCardBodyWidth">
-      
-
           <div className="taskCardBody">
-            
-                <div className="feedCardBackground">
-         
-            <img
-              src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"
-              alt="profile"
-              className="feedImage"
-            />
-               <button onClick={() => navigate("/createtask")}   className="shareTestimonyButton">
-              Share a testimony...
-            </button>
-          </div>
+            <div className="feedCardBackground">
+              <img
+                src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg"
+                alt="profile"
+                className="feedImage"
+              />
+              <Link to="/createtask" className="shareTestimonyButton">
+                Share a testimony...
+              </Link>
+            </div>
             {tasks.map((task) => (
               <Task
                 key={task.id}

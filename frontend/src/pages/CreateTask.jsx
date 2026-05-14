@@ -49,11 +49,10 @@ const CreateTask = () => {
     }
   };
 
-  useEffect(() => {
-    return () => {
-      if (img) URL.revokeObjectURL(img);
-    };
-  }, [img]);
+useEffect(() => () => {
+  if (img) URL.revokeObjectURL(img);
+}, [img]);
+
 
   return (
     <div>

@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import api from "../api/axios.js";
-import { toast } from "react-toastify";
 
 const TaskContext = createContext();
 
@@ -16,7 +15,7 @@ export const TaskProvider = ({ children }) => {
       setTasks(res.data.tasks);
       setCurrentUserId(res.data.currentUserId);
     } catch (err) {
-      toast.error(err.response?.data?.error || err.message);
+      console.error(err.response?.data?.error || err.message);
     } finally {
       setLoading(false);
     }
@@ -30,13 +29,14 @@ export const TaskProvider = ({ children }) => {
     getTasks();
   }, [getTasks]);
 
-  const updateTaskInState = (updatedTask) => {
-    setTasks((prevTasks) => {
-      return prevTasks.map((task) =>
-        task.uuid === updatedTask.uuid ? updatedTask : task,
-      );
-    });
-  };
+const updateTaskInState = (updatedTask) => {
+  setTasks((prevTasks) =>
+    prevTasks.map((task) =>
+      task.uuid === updatedTask.uuid ? updatedTask : task
+    )
+  );
+};
+
 
   const deleteTaskFromState = (uuid) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.uuid !== uuid));
@@ -57,6 +57,18 @@ export const TaskProvider = ({ children }) => {
       }),
     );
   };
+
+//   export const useTasks = () => {
+//   const context = useContext(TaskContext);
+  
+//   // Guard clause to catch configuration errors instantly
+//   if (!context) {
+//     throw new Error("useTasks must be used within a TaskProvider");
+//   }
+  
+//   return context;
+// };
+
   return (
     <TaskContext.Provider
       value={{

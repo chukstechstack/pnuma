@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/Login.css";
 import { useNavigate } from "react-router-dom";
 
-
 const LoginInput = ({ handleChange, password, email, handleSubmit }) => {
   const navigate = useNavigate();
 
@@ -18,7 +17,7 @@ const LoginInput = ({ handleChange, password, email, handleSubmit }) => {
         />
 
         <input
-          type="string"
+          type="password"
           name="password"
           value={password}
           onChange={handleChange}
@@ -33,7 +32,10 @@ const LoginInput = ({ handleChange, password, email, handleSubmit }) => {
           <div className="login">
             <p>
               create account?
-              <span onClick={() => navigate("/register")} className="login-link">
+              <span
+                onClick={() => navigate("/register")}
+                className="login-link"
+              >
                 Register
               </span>
             </p>
@@ -41,7 +43,7 @@ const LoginInput = ({ handleChange, password, email, handleSubmit }) => {
               <p className="or">or</p>
 
               <a
-                href="http://localhost:3000/auth/google"
+                href="https://pneuma-api-0bvr.onrender.com/auth/google"
                 className="google-btn"
               >
                 Sign up with Google

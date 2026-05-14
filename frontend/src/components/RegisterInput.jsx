@@ -38,8 +38,6 @@ const RegisterInput = ({
           placeholder="Email address"
         />
 
-    
-
         <input
           type="password"
           name="password"
@@ -47,8 +45,6 @@ const RegisterInput = ({
           onChange={handleChange}
           placeholder="Password"
         />
-
-  
 
         <button className="register-button" type="submit">
           Continue
@@ -66,7 +62,7 @@ const RegisterInput = ({
               <p className="or">or</p>
 
               <a
-                href="http://localhost:3000/auth/google"
+                href="https://pneuma-api-0bvr.onrender.com/auth/google"
                 className="google-btn"
               >
                 Sign up with Google
