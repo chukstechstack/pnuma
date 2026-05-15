@@ -1,4 +1,4 @@
-import pool from "../../config/db.js";
+import pool from "../../config/supaseConfig.js";
 
 // 1. Insert raw text content and image link into content table
 export const insertNewTask = async (content, img_url, user_id) => {

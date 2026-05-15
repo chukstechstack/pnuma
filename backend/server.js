@@ -1,13 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
-import pool from "./config/db.js";
-import { mainAuthRouter } from "./routes/main/mainauthrouter.js";
-import passport from "./config/passport.js";
+import pool from "./config/supaseConfig.js";
+import mainAuthRoute from "./routes/main/mainauthrouter.js";
+// Change this line inside your server.js:
+import passport from "./config/passport/serialize_deserialize.js";
+
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import cors from "cors";
-import mainTaskRouter from "./routes/main/maintaskrouter.js";
-import redisClient from "./config/redis.js";
+import mainTaskRoute from "./routes/main/maintaskrouter.js";
+import redisClient from "./config/redisCreateClient.js";
 
 
 
@@ -71,7 +73,8 @@ const sessionOptions = {
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  proxy: true
+  proxy: true,
+  rolling: true
 }
 
 app.use(session(sessionOptions))
@@ -83,8 +86,8 @@ const PORT = process.env.PORT || 3000;
 
 
 
-app.use("/auth", mainAuthRouter);
-app.use("/task", mainTaskRouter);
+app.use("/auth", mainAuthRoute);
+app.use("/task", mainTaskRoute);
 app.use((err, req, res, next) => {
   console.error(err);
 

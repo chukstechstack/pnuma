@@ -2,8 +2,8 @@ import multer from "multer";
 import TaskInputError from "../../utils/taskInputError.js";
 import sharp from "sharp";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
-import s3 from "../../config/s3.js";
-import redisClient from "../../config/redis.js";
+import s3 from "../../config/AwsS3ClientConfig.js";
+import redisClient from "../../config/redisCreateClient.js";
 
 // Import your newly created database service workers
 import { insertNewTask, fetchHydratedTaskById } from "../../services/task/createTaskService.js";

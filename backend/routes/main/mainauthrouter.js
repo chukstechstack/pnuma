@@ -1,8 +1,8 @@
 import express from "express";
-import { authRouter } from "../authroute.js";
+import  authRoute  from "../authroute.js";
 
-const mainAuthRouter = express.Router();
+const mainAuthRoute = express.Router();
 
-mainAuthRouter.use("/", authRouter);
+mainAuthRoute.use("/", authRoute);
 
-export { mainAuthRouter };
+export default mainAuthRoute;

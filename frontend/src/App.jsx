@@ -8,6 +8,7 @@ import HomePage from "./pages/Home.jsx";
 import CreateTask from "./pages/CreateTask.jsx";
 import EditPost from "./pages/EditTask.jsx";
 import { TaskProvider } from "./context/TaskContext";
+import LogoutButton from "./pages/Profile.jsx";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/createtask" element={<CreateTask />} />
           <Route path="/edittask/:uuid" element={<EditPost />} />
+          <Route path="profile" element={<LogoutButton />} />
         </Routes>
       </Router>
     </TaskProvider>

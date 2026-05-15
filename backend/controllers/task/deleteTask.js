@@ -1,6 +1,6 @@
-import s3 from "../../config/s3.js";
+import s3 from "../../config/AwsS3ClientConfig.js";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
-import redisClient from "../../config/redis.js";
+import redisClient from "../../config/redisCreateClient.js";
 
 // Import your newly created service infrastructure
 import { findTaskImageForCleanup, executeTaskDeletion } from "../../services/task/deleteTaskService.js";
@@ -8,7 +8,7 @@ import { findTaskImageForCleanup, executeTaskDeletion } from "../../services/tas
 export const deleteTask = async (req, res, next) => {
   const { uuid } = req.params;
   const user_id = req.user.id;
-  
+
   try {
     // Execution Layer 1: Query the task image data using the service layer
     const taskRecord = await findTaskImageForCleanup(uuid, user_id);
@@ -31,7 +31,7 @@ export const deleteTask = async (req, res, next) => {
         console.log(`AWS S3 cleanup success: ${filePath}`);
       }
     }
-    
+
     // Execution Layer 2: Run the row deletion statement through the service layer
     const deletedCount = await executeTaskDeletion(uuid, user_id);
     if (deletedCount === 0) {

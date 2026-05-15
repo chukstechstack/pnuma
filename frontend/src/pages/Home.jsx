@@ -11,15 +11,7 @@ import DevBanner from "../components/DevBanner";
 const HomePage = () => {
   const { tasks, deleteTaskFromState, currentUserId } = useContext(TaskContext);
 
-  // const logout = async () => {
-  //   try {
-  //     await api.post("/auth/logout");
-  //     navigate("/login");
-  //   } catch (err) {
-  //     const message = err?.response?.data?.error || err.message;
-  //     console.log(message);
-  //   }
-  // };
+  
 
   const deleteTask = async (uuid) => {
     try {

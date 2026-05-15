@@ -1,14 +1,19 @@
 import LoginError from "../../utils/loginError.js";
-import passport from "passport";
+import passport from  "../../config/passport/serialize_deserialize.js";
 
 export const loginUser = (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     if (err) return next(err);
-    if (!user) return next(new LoginError("user not found Register!!", 404));
+    if (!user) return next(new LoginError(info?.message || "user not found Register!!", 404));
 
     req.login(user, (err) => {
-      if (err) return next(new LoginError("login failed", 500));
-      return res.json({ message: "Login successful" });
+      if (err) return next(err);
+      
+      // Explicitly wait until session database writes settle
+      req.session.save((sessionErr) => {
+        if (sessionErr) return next(sessionErr);
+        return res.status(200).json({ message: "logged in successfully" });
+      });
     });
-  })(req, res, next);
+  })(req, res, next); // ✅ Fixed syntax error here: correctly closed bracket and passed parameters
 };

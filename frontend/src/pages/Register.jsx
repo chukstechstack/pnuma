@@ -9,7 +9,7 @@ import FullPageLoader from "../components/Loader.jsx";
 import "../styles/Loader.css";
 
 const Register = () => {
-  const [isLoading, setIsLoading ] = useState(false) 
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const [register, setRegister] = useState({
     username: "",
@@ -30,8 +30,9 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true) 
+
     try {
+      setIsLoading(true);
       await api.post("/auth/register", register);
 
       setRegister({
@@ -47,12 +48,13 @@ const Register = () => {
     } catch (err) {
       const message = err.response?.data?.error || err.message;
       console.error(message);
-      setIsLoading(false)
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
     <div>
-      {isLoading && <FullPageLoader/>}
+      {isLoading && <FullPageLoader />}
       <div className="input-body">
         <div className="sign-up">
           <h1> Sign up</h1>

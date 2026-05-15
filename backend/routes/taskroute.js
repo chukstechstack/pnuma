@@ -9,18 +9,18 @@ import { deleteTask } from "../controllers/task/deleteTask.js";
 import { getEditPage } from "../controllers/task/fetchEditTask.js";
 import { toggleLike } from "../controllers/task/toggleLike.js";
 
-const taskRouter = express.Router();
+const taskRoute = express.Router();
 
 // 1. Protected Static Feed Read Route
-taskRouter.get("/", ensureAuthenticated, getTask);
+taskRoute.get("/", ensureAuthenticated, getTask);
 
 // 2. Protected Multi-part Media Creation Route (Inject Multer Here)
-taskRouter.post("/", ensureAuthenticated, upload.single("img"), createTask);
+taskRoute.post("/", ensureAuthenticated, upload.single("img"), createTask);
 
 // 3. Protected Dynamic Resource Parameter Routes
-taskRouter.patch("/:uuid", ensureAuthenticated, upload.single("img"), patchTask);
-taskRouter.delete("/:uuid", ensureAuthenticated, deleteTask);
-taskRouter.get("/:uuid/post", ensureAuthenticated, getEditPage);
-taskRouter.post("/:uuid/likes", ensureAuthenticated, toggleLike);
+taskRoute.patch("/:uuid", ensureAuthenticated, upload.single("img"), patchTask);
+taskRoute.delete("/:uuid", ensureAuthenticated, deleteTask);
+taskRoute.get("/:uuid/post", ensureAuthenticated, getEditPage);
+taskRoute.post("/:uuid/likes", ensureAuthenticated, toggleLike);
 
-export default taskRouter;
+export default taskRoute;

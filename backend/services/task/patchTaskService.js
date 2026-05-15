@@ -1,4 +1,4 @@
-import pool from "../../config/db.js";
+import pool from "../../config/supaseConfig.js";
 
 // 1. Fetches the old target task to inspect its existing asset state for storage cleanup
 export const fetchOldTaskImage = async (uuid, user_id) => {
@@ -28,7 +28,7 @@ export const executeDynamicTaskUpdate = async (uuid, user_id, contentUpdate, img
 
   // Append safe verification constraints to the values array list
   values.push(uuid, user_id);
-  
+
   const queryStr = `UPDATE content 
                     SET ${updates.join(", ")} 
                     WHERE uuid = $${values.length - 1} AND user_id = $${values.length} 

@@ -1,4 +1,4 @@
-import pool from "../../config/db.js";
+import pool from "../../config/supaseConfig.js";
 
 // 1. Verifies ownership and retrieves the image path string for S3 asset matching
 export const findTaskImageForCleanup = async (uuid, user_id) => {

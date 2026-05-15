@@ -1,7 +1,7 @@
 import sharp from "sharp";
 import { PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
-import s3 from "../../config/s3.js";
-import redisClient from "../../config/redis.js";
+import s3 from "../../config/AwsS3ClientConfig.js";
+import redisClient from "../../config/redisCreateClient.js";
 
 // Import your newly created dynamic service workers
 import { fetchOldTaskImage, executeDynamicTaskUpdate } from "../../services/task/patchTaskService.js";

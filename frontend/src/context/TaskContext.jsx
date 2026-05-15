@@ -8,18 +8,24 @@ export const TaskProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(null);
 
-  const getTasks = useCallback(async () => {
+   const getTasks = useCallback(async () => {
     setLoading(true);
     try {
       const res = await api.get("/task");
       setTasks(res.data.tasks);
       setCurrentUserId(res.data.currentUserId);
     } catch (err) {
-      console.error(err.response?.data?.error || err.message);
+      // If it's a 401, don't crash or print complex logs—it just means they haven't logged in yet!
+      if (err.response?.status === 401) {
+        console.log("👤 User is currently a guest. Waiting for login/register...");
+      } else {
+        console.error(err.response?.data?.error || err.message);
+      }
     } finally {
       setLoading(false);
     }
   }, []);
+
 
   const addTaskToState = (newTask) => {
     setTasks((prevTasks) => [newTask, ...prevTasks]);

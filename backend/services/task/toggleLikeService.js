@@ -1,4 +1,4 @@
-import pool from "../../config/db.js";
+import pool from "../../config/supaseConfig.js";
 
 // 1. Translates a public UUID string into an internal integer ID
 export const fetchPostIdByUuid = async (uuid) => {

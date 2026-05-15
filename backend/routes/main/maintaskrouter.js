@@ -1,9 +1,9 @@
 import express from "express";
-import taskRouter from "../taskroute.js";
+import taskRoute from "../taskroute.js";
 
-const mainTaskRouter = express.Router();
+const mainTaskRoute = express.Router();
 
-mainTaskRouter.use("/", taskRouter);
+mainTaskRoute.use("/", taskRoute);
 
 
-export default mainTaskRouter ;
+export default mainTaskRoute ;

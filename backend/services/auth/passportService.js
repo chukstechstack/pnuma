@@ -1,4 +1,4 @@
-import pool from "../../config/db.js";
+import pool from "../../config/supaseConfig.js";
 
 export const findUserByEmail = async (email) => {
   const result = await pool.query(
@@ -18,13 +18,13 @@ export const findUserById = async (uuid) => {
 
 export const findUserByGoogle_id = async (google_id) => {
   const result = await pool.query(
-    ` SELECT uuid from profiles WHERE google_id = $1`,
+    ` SELECT id, uuid, username from profiles WHERE google_id = $1`,
     [google_id],
   );
   return result.rows[0] || null;
 };
 
- export const findGoogleUserByEmail = async (email) => {
+export const findGoogleUserByEmail = async (email) => {
   const result = await pool.query(
     ` SELECT uuid from profiles WHERE email = $1`,
     [email],
@@ -32,8 +32,8 @@ export const findUserByGoogle_id = async (google_id) => {
   return result.rows[0] || null;
 };
 
- export const updateGoogleIdByEmail =  async (google_Id, email) => {
-  const result =  await pool.query(
+export const updateGoogleIdByEmail = async (google_Id, email) => {
+  const result = await pool.query(
     `update profiles set google_id =$1 WHERE email = $2 RETURNING *`, [google_Id, email]
   );
   return result.rows[0] || null;

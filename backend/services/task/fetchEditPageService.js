@@ -1,4 +1,4 @@
-import pool from "../../config/db.js";
+import pool from "../../config/supaseConfig.js";
 
 // Fetches a single specific post based on UUID and author ownership constraints
 export const fetchTaskByOwnership = async (uuid, userId) => {
