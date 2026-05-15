@@ -2,7 +2,7 @@ import express from "express";
 import { registerUser } from "../controllers/auth/registerUser.js";
 import { loginUser } from "../controllers/auth/loginUser.js";
 import { logoutUser } from "../controllers/auth/logoutUser.js";
-import { googleCallBack } from "../controllers/auth/googleCallBack.js";
+import { googleCallBack } from "../controllers/auth/googleCallback.js";
 import { googleLogin } from "../controllers/auth/googleLogin.js";
 
 const authRoute = express.Router();
