@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios.js"; // Your configured Axios instance
 
- const  ProfilePage = () => {
+ const  ProfilePageLog = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -49,4 +49,4 @@ import api from "../api/axios.js"; // Your configured Axios instance
     </button>
   );
 }
-export default ProfilePage;
+export default ProfilePageLog;

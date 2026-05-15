@@ -8,7 +8,7 @@ import HomePage from "./pages/Home.jsx";
 import CreateTask from "./pages/CreateTask.jsx";
 import EditPost from "./pages/EditTask.jsx";
 import { TaskProvider } from "./context/TaskContext.jsx"; // Added .jsx extension just in case
-import ProfilePage from "./pages/Profile.jsx"; //  Renamed import variable to prevent compilation confusion
+import ProfilePageLog from "./pages/Profile.jsx"; //  Renamed import variable to prevent compilation confusion
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/createtask" element={<CreateTask />} />
           <Route path="/edittask/:uuid" element={<EditPost />} />
-          <Route path="/profile" element={<ProfilePage />} /> {/*  Updated matching element */}
+          <Route path="/profile" element={<ProfilePageLog />} /> {/*  Updated matching element */}
         </Routes>
       </Router>
     </TaskProvider>
