@@ -21,7 +21,7 @@ const App = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/createtask" element={<CreateTask />} />
           <Route path="/edittask/:uuid" element={<EditPost />} />
-          <Route path="profile" element={<LogoutButton />} />
+          <Route path="/profile" element={<LogoutButton />} />
         </Routes>
       </Router>
     </TaskProvider>
